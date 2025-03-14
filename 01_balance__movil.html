@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_balance__movil</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="01_balance__movil.css">
+    </head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title has-text-centered ">Balances Nocturnos</h1>
+            <div id="button-container" class="buttons is-centered"></div>
+            <div id="box-container"></div>
+        </div>
+    </section>
+
+    <script>
+        const buttonContainer = document.getElementById('button-container');
+        const boxContainer = document.getElementById('box-container');
+
+        // Generar 12 boxes dinámicamente
+        for (let i = 1; i <= 12; i++) {
+            const button = document.createElement('button');
+            button.className = 'button is-info is-active';
+            button.textContent = `Box ${i}`;
+            button.setAttribute('data-box', `box${i}`);
+            buttonContainer.appendChild(button);
+
+            const box = document.createElement('div');
+            box.id = `box${i}`;
+            box.className = 'box is-hidden';
+            box.innerHTML = `	
+		
+		<button class="button is-info  is-rounded is-fullwidth"><strong>Box ${i}</strong></button><br>
+    <!-- Peso y horas -->
+		<div class="columns">
+                    <div class="column is-half">
+                        <div class="field">
+                            <label class="label">Peso (kg):</label>
+                            <div class="control">
+                                <input id="peso-box${i}" class="input" type="number" placeholder="Peso en kg" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <div class="field">
+                            <label class="label">Horas:</label>
+                            <div class="control">
+                            <input id="horas-box${i}" class="input horas" type="number" min="0" max="24" placeholder="0-24" oninput="validateHours(${i})">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+	
+    <!-- Tabla de Pérdidas -->
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth tabla-perdidas">
+    <thead>
+        <tr>
+            <th>Pérdidas</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+			<td>Diuresis</td>
+            <td><input id="diuresis-box${i}" class="input perdida" type="number" placeholder="Diuresis"></td>
+		</tr>
+			
+        <tr>
+            <td>Vómitos Sudor Fiebre Tqn</td>
+            <td><input id="vofitq-box${i}" class="input perdida" type="number" placeholder="Vómitos Sudor Fiebre Tqn"></td>
+        </tr>
+        <tr>
+            <td>Fiebre >37ºC</td><td><input id="horas-fiebre37-box${i}" class="input horas" type="number" min="0" max="24" placeholder="Horas con Fiebre >37ºC" oninput="validateMaxValue(this, 24) "><input id="resultado-fiebre37-box${i}" class="input readonly" type="number" placeholder="Fiebre >37°C"  readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>Fiebre >38ºC</td><td><input id="horas-fiebre38-box${i}" class="input horas" type="number" min="0" max="24" placeholder="Horas con Fiebre >38ºC" oninput="validateMaxValue(this, 24) "><input id="resultado-fiebre38-box${i}" class="input readonly" type="number" placeholder="Fiebre >38°C"  readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>Fiebre >39ºC</td><td><input id="horas-fiebre39-box${i}" class="input horas" type="number" min="0" max="24" placeholder="Horas con Fiebre >39ºC" oninput="validateMaxValue(this, 24) "><input id="resultado-fiebre39-box${i}" class="input readonly" type="number" placeholder="Fiebre >39°C"  readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>Rpm >25</td><td><input id="horas-rpm25-box${i}" class="input horas" type="number" min="0" max="24" placeholder="Horas con Rpm >25" oninput="validateMaxValue(this, 24) "><input id="resultado-rpm25-box${i}" class="input readonly" type="number" placeholder="Rpm >25"  readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>Rpm >35</td><td><input id="horas-rpm35-box${i}" class="input horas" type="number" min="0" max="24" placeholder="Horas con Rpm >35" oninput="validateMaxValue(this, 24) "><input id="resultado-rpm35-box${i}" class="input readonly" type="number" placeholder="Rpm >35"  readonly>
+            </td>
+        </tr>
+        <tr>
+            <td>Sng</td>
+            <td><input type="number" id="sng-box${i}" class="input perdida" placeholder="Sng"></td>
+        </tr>
+        <tr>
+            <td>Hdfvvc</td>
+            <td><input type="number" id="hdfvvc-box${i}" class="input perdida" placeholder="Hdfvvc"></td>
+        </tr>
+        <tr>
+            <td>Drenajes</td>
+            <td><input type="number" id="drenajes-box${i}" class="input perdida" placeholder="Drenajes"></td>
+        </tr
+        <tr>
+            <td>Control de Residuos</td>
+            <td><input type="number" id="controlderesiduos-box${i}" class="input perdida" placeholder="Control de Residuos"></td>
+        </tr
+        <tr>
+            <td>Pérdidas Insensibles</td><td><input id="perdidas-insensibles-box${i}" class="input readonly" type="number" placeholder="Pérdidas Insensibles" readonly></td>
+            <tr>
+        <tr>	
+            <td>Cálculo de Vómitos, Sudor, Fiebre y Tqn</td>
+            <td><input type="number" id="fuerafluidos-box${i}" class="input readonly" placeholder="Vómitos,Sudor,Fiebre,Tqn" readonly>
+        </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Total Pérdidas</th>
+            <td><input id="total-perdidas-box${i}" class="input readonly total-perdidas" type="number" placeholder="Total Pérdidas" readonly></td>
+        </tr>
+        <tr>
+            <th>Balance</th>
+            <td colspan="3"><input id="balance-box${i}" class="input readonly balance-field" type="number" placeholder="Balance" readonly></td>
+        </tr>
+    </tfoot>
+</table>
+   
+		<div class="buttons is-centered">
+                    <button class="button is-danger is-rounded is-active" onclick="clearData(${i})">Borrar Datos</button>
+        </div>
+
+        <!-- Tabla de Ingresos -->
+            <div class="table-container">
+                <table class="table is-bordered is-striped is-hoverable tabla-ingresos">
+                    <thead>
+                        <tr>
+                            <th>Ingresos</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+    <tbody>
+        <tr>
+            <td>Midazolán</td>
+            <td><input id="midazolam-box${i}" class="input ingreso" type="number" placeholder="Midazolán"></td>
+        </tr>
+		<tr>
+            <td>Fentanest</td>
+            <td><input id="fentanest-box${i}" class="input ingreso" type="number" placeholder="Fentanest"></td>
+        </tr>
+        <tr>
+            <td>Propofol</td>
+            <td><input id="propofol-box${i}" class="input ingreso" type="number" placeholder="Propofol"></td>
+        </tr>
+        <tr>
+            <td>Remifentanilo</td>
+            <td><input id="remifentanilo-box${i}" class="input ingreso" type="number" placeholder="Remifentanilo"></td>                                 
+        </tr>
+        <tr>
+            <td>Dexdor</td>
+            <td><input id="dexdor-box${i}" class="input ingreso" type="number" placeholder="Dexdor"></td>
+        </tr>
+        <tr>
+            <td>Noradrenalina</td>
+            <td><input id="noradrenalina-box-${i}" class="input ingreso" type="number" placeholder="Noradrenalina"></td>
+        </tr>
+        <tr>
+            <td>Insulina</td>
+            <td><input id="insulina-box${i}" class="input ingreso" type="number" placeholder="Insulina"></td>
+		</tr>
+        <tr>
+            <td>Sueroterapia 1</td>
+            <td><input type="number" id="sueroterapia1-box${i}" class="input ingreso" placeholder="Sueroterapia 1"></td>
+        </tr>
+        <tr>
+            <td>Sueroterapia 2</td>
+            <td><input type="number" id="sueroterapia2-box${i}" class="input ingreso" placeholder="Sueroterapia 2"></td>
+        </tr>
+        <tr>
+            <td>Sueroterapia 3</td>
+            <td><input type="number" id="sueroterapia3-box${i}" class="input ingreso" placeholder="Sueroterapia 3"></td>
+        </tr        
+        <tr>
+            <td>Medicación</td>
+            <td><input type="number" id="medicacion-box${i}" class="input ingreso" placeholder="Medicación"></td>
+        </tr>
+        <tr>
+            <td>Sangre/Plasma</td> <td><input type="number" id="sangreplasma-box${i}" class="input ingreso" placeholder="Sangre/Plasma"></td>
+        <tr>
+            <td>Agua Endógena</td>
+            <td><input id="agua-endogena-box${i}" class="input readonly" type="number" placeholder="Agua Endógena" readonly></td>
+        </tr>
+        <tr>
+		<td>Oral</td>
+        <td><input type="number" id="oral-box${i}" class="input ingreso" placeholder="Oral"></td>
+
+		<tr>
+            <td>Enteral</td>
+            <td><input type="number" id="enteral-box${i}" class="input ingreso" placeholder="Enteral"></td>
+        </tr>
+		<tr>
+            <td>Parenteral</td>
+            <td><input type="number" id="parenteral-box${i}" class="input ingreso" placeholder="Parenteral"></td>
+        </tr>
+    </tbody>
+        <tfoot>
+        <tr>
+            <th>Total Ingresos</th>
+            <td><input id="total-ingresos-box${i}" class="input readonly total-ingresos" type="number"  placeholder="Total Ingresos" readonly></td>
+        </tr>
+    </tfoot>
+
+</thead>
+    </table>
+        <div class="buttons is-centered">
+            <button class="button is-danger is-rounded is-active" onclick="clearData(${i})">Borrar Datos</button>
+        </div>  
+
+            `;
+            
+            boxContainer.appendChild(box);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('#button-container .button');
+            const boxes = document.querySelectorAll('.box');
+
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    boxes.forEach(box => box.classList.add('is-hidden'));
+                    document.getElementById(`box${index + 1}`).classList.remove('is-hidden');
+                });
+            });
+
+            boxes[0].classList.remove('is-hidden');
+
+            // Validar campos de horas
+            const horaInputs = document.querySelectorAll('input[id^="horas-box"]');
+            horaInputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (input.value > 24) input.value = 24;
+                    if (input.value < 0) input.value = 0;
+                });
+            });
+        });
+
+      // Registrar eventos para realizar cálculos
+      document.addEventListener('input', (e) => {
+        if (e.target.classList.contains('input')) {
+            const boxId = e.target.id.match(/box(\d+)/)[1];
+            calculateAll(boxId);
+        }
+    });  
+
+
+
+ function calculateAll(boxId) {
+        const peso = parseFloat(document.getElementById(`peso-box${boxId}`).value) || 0;
+        const horas = parseFloat(document.getElementById(`horas-box${boxId}`).value) || 0;
+
+        // Calcular Agua Endógena y Pérdidas Insensibles
+        const aguaEndogena = horas < 20 ? horas * 20 : 400;
+        const perdidasInsensibles = peso * horas * 0.5;
+        document.getElementById(`agua-endogena-box${boxId}`).value = aguaEndogena.toFixed();
+        document.getElementById(`perdidas-insensibles-box${boxId}`).value = perdidasInsensibles.toFixed();
+
+        // Cálculos de fiebre y RPM
+        calculateFiebreRPM(boxId, peso);
+
+        // Calcular Total Ingresos
+        calculateTotals(boxId);
+    }
+
+    function calculateFiebreRPM(boxId, peso) {
+        const fiebre37 = peso * (parseFloat(document.getElementById(`horas-fiebre37-box${boxId}`).value) || 0) * 0.1;
+        const fiebre38 = peso * (parseFloat(document.getElementById(`horas-fiebre38-box${boxId}`).value) || 0) * 0.2;
+        const fiebre39 = peso * (parseFloat(document.getElementById(`horas-fiebre39-box${boxId}`).value) || 0) * 0.3;
+        const rpm25 = peso * (parseFloat(document.getElementById(`horas-rpm25-box${boxId}`).value) || 0) * 0.2;
+        const rpm35 = peso * (parseFloat(document.getElementById(`horas-rpm35-box${boxId}`).value) || 0) * 0.3;
+
+        document.getElementById(`resultado-fiebre37-box${boxId}`).value = fiebre37.toFixed();
+        document.getElementById(`resultado-fiebre38-box${boxId}`).value = fiebre38.toFixed();
+        document.getElementById(`resultado-fiebre39-box${boxId}`).value = fiebre39.toFixed();
+        document.getElementById(`resultado-rpm25-box${boxId}`).value = rpm25.toFixed();
+        document.getElementById(`resultado-rpm35-box${boxId}`).value = rpm35.toFixed();
+    }
+
+    function calculateTotals(boxId) {
+        // Sumar todos los ingresos
+        const ingresosInputs = document.querySelectorAll(`#box${boxId} .ingreso`);
+        let totalIngresos = 0;
+        ingresosInputs.forEach(input => {
+            totalIngresos += parseFloat(input.value) || 0;
+        });
+
+        // Añadir Agua Endógena a Total Ingresos
+        const aguaEndogena = parseFloat(document.getElementById(`agua-endogena-box${boxId}`).value) || 0;
+        totalIngresos += aguaEndogena;
+        document.getElementById(`total-ingresos-box${boxId}`).value = totalIngresos.toFixed();
+
+        // Sumar todos las pérdidas
+        const perdidasInputs = document.querySelectorAll(`#box${boxId} .perdida`);
+        let totalPerdidas = 0;
+        perdidasInputs.forEach(input => {
+            totalPerdidas += parseFloat(input.value) || 0;
+        });
+
+        // Incluir pérdidas insensibles y valores de fiebre y RPM
+        const perdidasInsensibles = parseFloat(document.getElementById(`perdidas-insensibles-box${boxId}`).value) || 0;
+        const fiebre37 = parseFloat(document.getElementById(`resultado-fiebre37-box${boxId}`).value) || 0;
+        const fiebre38 = parseFloat(document.getElementById(`resultado-fiebre38-box${boxId}`).value) || 0;
+        const fiebre39 = parseFloat(document.getElementById(`resultado-fiebre39-box${boxId}`).value) || 0;
+        const rpm25 = parseFloat(document.getElementById(`resultado-rpm25-box${boxId}`).value) || 0;
+        const rpm35 = parseFloat(document.getElementById(`resultado-rpm35-box${boxId}`).value) || 0;
+
+        totalPerdidas += perdidasInsensibles + fiebre37 + fiebre38 + fiebre39 + rpm25 + rpm35;
+        document.getElementById(`total-perdidas-box${boxId}`).value = totalPerdidas.toFixed();
+
+        // Calcular Balance
+const balance = totalIngresos - totalPerdidas;
+const balanceElement = document.getElementById(`balance-box${boxId}`);
+if (balanceElement) {
+    balanceElement.value = balance.toFixed();
+
+    // Cambiar color y tamaño según el balance
+    if (balance > 0) {
+        balanceElement.style.color = "blue"; // Color azul para balance positivo
+    } else if (balance < 0) {
+        balanceElement.style.color = "red"; // Color rojo para balance negativo
+    } else {
+        balanceElement.style.color = "black"; // Color negro para balance cero
+    }
+
+    balanceElement.style.fontSize = "1.2em"; // Incrementar el tamaño de la fuente
+    balanceElement.style.fontWeight = "bold"; // Hacer la fuente más visible
+}
+
+    }
+
+function calculateSudorFiebreTqn(boxId) {
+    // Obtener los valores relevantes
+    const vomitos = parseFloat(document.getElementById(`vofitq-box${boxId}`).value) || 0;
+    const fiebre37 = parseFloat(document.getElementById(`resultado-fiebre37-box${boxId}`).value) || 0;
+    const fiebre38 = parseFloat(document.getElementById(`resultado-fiebre38-box${boxId}`).value) || 0;
+    const fiebre39 = parseFloat(document.getElementById(`resultado-fiebre39-box${boxId}`).value) || 0;
+    const rpm25 = parseFloat(document.getElementById(`resultado-rpm25-box${boxId}`).value) || 0;
+    const rpm35 = parseFloat(document.getElementById(`resultado-rpm35-box${boxId}`).value) || 0;
+
+    // Calcular el total
+    const totalSudorFiebreTqn = vomitos + fiebre37 + fiebre38 + fiebre39 + rpm25 + rpm35;
+
+    // Actualizar el campo correspondiente
+    const outputField = document.getElementById(`fuerafluidos-box${boxId}`);
+    if (outputField) {
+        outputField.value = totalSudorFiebreTqn.toFixed(); // Mostrar con dos decimales
+    }
+}
+
+function calculateAll(boxId) {
+    const peso = parseFloat(document.getElementById(`peso-box${boxId}`).value) || 0;
+    const horas = parseFloat(document.getElementById(`horas-box${boxId}`).value) || 0;
+
+    // Calcular Agua Endógena y Pérdidas Insensibles
+    const aguaEndogena = horas < 20 ? horas * 20 : 400;
+    const perdidasInsensibles = peso * horas * 0.5;
+    document.getElementById(`agua-endogena-box${boxId}`).value = aguaEndogena.toFixed();
+    document.getElementById(`perdidas-insensibles-box${boxId}`).value = perdidasInsensibles.toFixed();
+
+    // Cálculos de fiebre y RPM
+    calculateFiebreRPM(boxId, peso);
+
+    // Calcular Vómitos, Sudor, Fiebre y Tqn
+    calculateSudorFiebreTqn(boxId);
+
+    // Calcular Totales
+    calculateTotals(boxId);
+}
+// Modificar tabs usando Bulma
+document.querySelectorAll('.tabs a').forEach((button) => {
+    button.addEventListener('click', () => {
+        // Eliminar la clase activa de todos los tabs
+        document.querySelectorAll('.tabs a').forEach((btn) => btn.classList.remove('is-success', 'is-active'));
+        button.classList.add('is-success', 'is-active'); // Agregar clases Bulma al tab activo
+
+        const tabId = button.getAttribute('data-tab');
+
+        // Ocultar todos los boxes
+        document.querySelectorAll('#form-container > div').forEach((form) => {
+            form.classList.add('is-hidden');
+        });
+
+        // Mostrar el box correspondiente
+        const activeBox = document.getElementById(tabId);
+        activeBox.classList.remove('is-hidden');
+    });
+});
+
+
+        // Función para borrar datos
+        function clearData(boxId) {
+    // Seleccionar todos los inputs dentro del box correspondiente
+    const inputs = document.querySelectorAll(`#box${boxId} .input`);
+    inputs.forEach(input => {
+        if (!input.readOnly) {
+            input.value = ''; // Limpiar campos editables
+        } else {
+            input.value = '0'; // Opcional: Resetear campos de solo lectura a 0 si lo deseas
+        }
+    });
+
+    // Restablecer el balance y totales
+    document.getElementById(`total-ingresos-box${boxId}`).value = '';
+    document.getElementById(`total-perdidas-box${boxId}`).value = '';
+    document.getElementById(`balance-box${boxId}`).value = '';
+}
+
+
+        // Activar tabs
+        document.querySelectorAll('.tabs a').forEach((button) => {
+            button.addEventListener('click', () => {
+                // Quitar clase activa de todos los tabs
+                document.querySelectorAll('.tabs a').forEach((btn) => btn.classList.remove('is-active'));
+                button.classList.add('is-active');
+
+                const tabId = button.getAttribute('data-tab');
+
+                // Ocultar todos los boxes
+                document.querySelectorAll('#form-container > div').forEach((form) => {
+                    form.classList.add('is-hidden');
+                });
+
+                // Mostrar el box correspondiente
+                const activeBox = document.getElementById(tabId);
+                activeBox.classList.remove('is-hidden');
+            });
+        });
+function validateHours(boxId) {
+    const horasInput = document.getElementById(`horas-box${boxId}`);
+    if (horasInput.value > 24) {
+        horasInput.value = 24; // Limitar a 24
+        alert("El valor máximo permitido para horas es 24.");
+    } else if (horasInput.value < 0) {
+        horasInput.value = 0; // Limitar a 0
+        alert("El valor mínimo permitido para horas es 0.");
+    }
+}
+function validateMaxValue(input, max) {
+    if (input.value > max) {
+        input.value = max; // Limitar al valor máximo
+        alert(`El valor máximo permitido es ${max}.`);
+    } else if (input.value < 0) {
+        input.value = 0; // Limitar al valor mínimo
+        alert("El valor mínimo permitido es 0.");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const tables = document.querySelectorAll(".table-container table");
+
+    // Encuentra el ancho máximo entre todas las tablas
+    let maxWidth = 0;
+    tables.forEach(table => {
+        const width = table.offsetWidth;
+        if (width > maxWidth) maxWidth = width;
+    });
+
+    // Ajusta todas las tablas al mismo ancho
+    tables.forEach(table => {
+        table.style.width = maxWidth + "px";
+    });
+});
+
+
+</script>
+</script>
+    </script>
+    
+
+</body>
+</html>
+
+

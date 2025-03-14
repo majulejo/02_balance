@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_balance__movil copy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="03_balance__movil copy.css">
+    <style>
+        #box-container {
+            min-height: 200px; /* Ajustar la altura mínima */
+            margin-bottom: 10px; /* Reducir el espacio inferior */
+        }
+        #borrar-datos {
+            margin-top: 10px; /* Reducir el margen superior */
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <!-- Encabezado -->
+            <header class="box has-background-primary-light has-text-centered">
+                <h1 class="title">Balances Nocturnos</h1>
+                <div class="tabs is-centered">
+                    <ul id="box-links">
+                        <!-- Enlaces a los Box -->
+                    </ul>
+                </div>
+                <div id="selected-box" class="notification is-primary has-text-centered">
+                    <p class="is-size-5 has-text-weight-bold">Box seleccionado: <span id="selected-box-title">Ninguno</span></p>
+                </div>
+                <div class="columns">
+                    <div class="column is-half">
+                        <label class="label">Peso (kg):</label>
+                        <input id="peso" class="input" type="number" placeholder="Ingrese peso" min="1">
+                    </div>
+                    <div class="column is-half">
+                        <label class="label">Horas desde Ingreso:</label>
+                        <input id="horas" class="input" type="number" placeholder="Ingrese horas" min="0" max="24" oninput="validarHoras(this)">
+                    </div>
+                    
+                </div>
+            </header>
+            <div id="box-links" class="tabs is-centered">
+                <!-- Los enlaces de los boxes se generarán aquí -->
+            </div>
+            
+
+            <!-- Contenedor dinámico de box -->
+            <div id="box-container" class="box-container">
+                <!-- Boxes se generarán dinámicamente -->
+            </div>
+            <button id="borrar-datos" class="button is-danger" onclick="borrarDatos()">Borrar Datos</button>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="title">Pérdidas</h2>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Diuresis</td>
+                        <td><input id="diuresis" class="input perdida" type="number" placeholder="Diuresis"></td>
+                    </tr>
+                    <tr>
+                        <td>Vómitos Sudor Fiebre Tqn</td>
+                        <td><input id="vomitos" class="input perdida" type="number" placeholder="Vómitos Sudor Fiebre Tqn" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Fiebre >37°C</td>
+                        <td>
+                            <input id="fiebre37Horas" class="input" type="number" placeholder="Horas con Fiebre >37°C" min="0" max="24">
+                            <input id="fiebre37" class="input perdida" type="number" placeholder="Fiebre >37°C" readonly min="0" max="24">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fiebre >38°C</td>
+                        <td>
+                            <input id="fiebre38Horas" class="input" type="number" placeholder="Horas con Fiebre >38°C" min="0" max="24">
+                            <input id="fiebre38" class="input perdida" type="number" placeholder="Fiebre >38°C" readonly min="0" max="24">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fiebre >39°C</td>
+                        <td>
+                            <input id="fiebre39Horas" class="input" type="number" placeholder="Horas con Fiebre >39°C" min="0" max="24">
+                            <input id="fiebre39" class="input perdida" type="number" placeholder="Fiebre >39°C" readonly min="0" max="24">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>RPM >25</td>
+                        <td>
+                            <input id="rpm25Horas" class="input" type="number" placeholder="Horas con RPM >25" min="0" max="24">
+                            <input id="rpm25" class="input perdida" type="number" placeholder="RPM >25" readonly min="0" max="24">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>RPM >35</td>
+                        <td>
+                            <input id="rpm35Horas" class="input" type="number" placeholder="Horas con RPM >35" min="0" max="24">
+                            <input id="rpm35" class="input perdida" type="number" placeholder="RPM >35" readonly min="0" max="24">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sng</td>
+                        <td><input id="sng" class="input perdida" type="number" placeholder="Sng"></td>
+                    </tr>
+                    <tr>
+                        <td>Hdfvvc</td>
+                        <td><input id="hdfvvc" class="input perdida" type="number" placeholder="Hdfvvc"></td>
+                    </tr>
+                    <tr>
+                        <td>Drenajes</td>
+                        <td><input id="drenajes" class="input perdida" type="number" placeholder="Drenajes"></td>
+                    </tr>
+                    <tr>
+                        <td>Pérdidas Insensibles</td>
+                        <td><input id="perdidas-insensibles" class="input readonly" type="number" placeholder="Pérdidas Insensibles" readonly></td>
+                    </tr>
+                    
+                    <tr>	
+                        <td>Cálculo de Vómitos, Sudor, Fiebre y Tqn</td>
+                        <td><input type="number" id="fuerafluidos-box${i}" class="input readonly" placeholder="Vómitos,Sudor,Fiebre,Tqn" readonly>
+                    </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total Pérdidas</th>
+                        <td><input id="total-perdidas-box${i}" class="input readonly total-perdidas" type="number" placeholder="Total Pérdidas" readonly></td>
+                    </tr>
+                    <tr>
+                        <th>Balance</th>
+                        <td colspan="3"><input id="balance-box${i}" class="input readonly balance-field" type="number" placeholder="Balance" readonly></td>
+                    </tr>
+                    
+
+                </tbody>
+            </table>
+            <button id="borrar-datos" class="button is-danger" onclick="borrarDatos()">Borrar Datos</button>
+
+            <h2 class="title">Ingresos</h2>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midazolam</td>
+                        <td><input id="midazolam" class="input ingreso" type="number" placeholder="Midazolam"></td>
+                    </tr>
+                    <tr>
+                        <td>Fentanest</td>
+                        <td><input id="fentanest" class="input ingreso" type="number" placeholder="Fentanest"></td>
+                    </tr>
+                    <tr>
+                        <td>Propofol</td>
+                        <td><input id="propofol" class="input ingreso" type="number" placeholder="Propofol"></td>
+                    </tr>
+                    <tr>
+                        <td>Remifentanilo</td>
+                        <td><input id="remifentanilo" class="input ingreso" type="number" placeholder="Remifentanilo"></td>
+                    </tr>
+                    <tr>
+                        <td>Dexdor</td>
+                        <td><input id="dexdor" class="input ingreso" type="number" placeholder="Dexdor"></td>
+                    </tr>
+                    <tr>
+                        <td>Noradrenalina</td>
+                        <td><input id="noradrenalina" class="input ingreso" type="number" placeholder="Noradrenalina"></td>
+                    </tr>
+                    <tr>
+                        <td>Insulina</td>
+                        <td><input id="insulina" class="input ingreso" type="number" placeholder="Insulina"></td>
+                    </tr>
+                    <tr>
+                        <td>Sueroterapia 1</td>
+                        <td><input type="number" id="sueroterapia1" class="input ingreso" placeholder="Sueroterapia 1"></td>
+                    </tr>
+                    <tr>
+                        <td>Sueroterapia 2</td>
+                        <td><input type="number" id="sueroterapia2" class="input ingreso" placeholder="Sueroterapia 2"></td>
+                    </tr>
+                    <tr>
+                        <td>Sueroterapia 3</td>
+                        <td><input type="number" id="sueroterapia3" class="input ingreso" placeholder="Sueroterapia 3"></td>
+                    </tr>        
+                    <tr>
+                        <td>Medicación</td>
+                        <td><input type="number" id="medicacion" class="input ingreso" placeholder="Medicación"></td>
+                    </tr>
+                    <tr>
+                        <td>Sangre/Plasma</td> <td><input type="number" id="sangreplasma" class="input ingreso" placeholder="Sangre/Plasma"></td>
+                    <tr>
+                        <td>Agua Endógena</td>
+                        <td><input id="agua-endogena" class="input readonly" type="number" placeholder="Agua Endógena" readonly></td>
+                    </tr>
+                    <tr>
+                    <td>Oral</td>
+                    <td><input type="number" id="oral" class="input ingreso" placeholder="Oral"></td>
+            
+                    <tr>
+                        <td>Enteral</td>
+                        <td><input type="number" id="enteral" class="input ingreso" placeholder="Enteral"></td>
+                    </tr>
+                    <tr>
+                        <td>Parenteral</td>
+                        <td><input type="number" id="parenteral" class="input ingreso" placeholder="Parenteral"></td>
+                    </tr>
+                </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Total Ingresos</th>
+                        <td><input id="total-ingresos" class="input readonly total-ingresos" type="number"  placeholder="Total Ingresos" readonly></td>
+                    </tr>
+                </tfoot>
+
+
+                </tbody>
+            </table>
+
+            <h2 class="title">Totales y Balance</h2>
+            <div class="notification is-info">
+                <p id="total-ingresos" class="is-size-5">Total Ingresos: 0</p>
+                <p id="total-perdidas" class="is-size-5">Total Pérdidas: 0</p>
+                <p id="balance-total" class="is-size-4 has-text-weight-bold">Balance: 0</p>
+            </div>
+        </div>
+    </section>
+
+    /*--12box--*/  
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const boxLinksContainer = document.getElementById("box-links");
+            const selectedBoxTitle = document.getElementById("selected-box-title");
+        
+            // Generar 12 boxes dinámicamente
+            for (let i = 1; i <= 12; i++) {
+                const boxName = `Box ${i}`;
+        
+                const link = document.createElement("a");
+                link.textContent = boxName;
+                link.href = "#";
+                link.classList.add("box-link");
+                link.dataset.box = boxName;
+        
+                // Evento para seleccionar el box
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+        
+                    // Quitar la clase activa de todos los boxes
+                    document.querySelectorAll(".box-link").forEach((link) => link.classList.remove("is-active"));
+        
+                    // Activar el box seleccionado
+                    link.classList.add("is-active");
+        
+                    // Actualizar el título del box seleccionado
+                    selectedBoxTitle.textContent = boxName;
+                });
+        
+                // Agregar el link al contenedor
+                boxLinksContainer.appendChild(link);
+            }
+        });
+        </script>
+<!--calculos-->      
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const selectedBoxTitle = document.getElementById("selected-box-title");
+        const pesoInput = document.getElementById("peso");
+        const horasInput = document.getElementById("horas");
+        const fiebre37HorasInput = document.getElementById("fiebre37Horas");
+        const fiebre37Output = document.getElementById("fiebre37");
+        const perdidasInsensiblesOutput = document.getElementById("perdidas-insensibles");
+        const aguaEndogenaOutput = document.getElementById("agua-endogena");
+        const rpm25Input = document.getElementById("rpm25");
+        const rpm35Input = document.getElementById("rpm35");
+    
+        const boxData = {};
+    
+        // Inicializar los datos de cada box
+        for (let i = 1; i <= 12; i++) {
+            const boxName = `Box ${i}`;
+            boxData[boxName] = {
+                peso: 0,
+                horas: 0,
+                fiebre37Horas: 0,
+                rpm25: 0,
+                rpm35: 0,
+            };
+        }
+    
+        // Actualizar valores en la interfaz
+        function updateUI(boxName) {
+            const data = boxData[boxName];
+            pesoInput.value = data.peso || "";
+            horasInput.value = data.horas || "";
+            fiebre37HorasInput.value = data.fiebre37Horas || "";
+            fiebre37Output.value = calculateFeverLoss(data.fiebre37Horas);
+            perdidasInsensiblesOutput.value = calculateInsensibleLoss(data.peso, data.horas);
+            aguaEndogenaOutput.value = calculateEndogenousWater(data.horas);
+            rpm25Input.value = data.rpm25 || 0;
+            rpm35Input.value = data.rpm35 || 0;
+        }
+    
+        // Fórmulas de cálculo
+        function calculateFeverLoss(fiebre37Horas) {
+            return (fiebre37Horas * 3.3).toFixed(2); // Fórmula de ejemplo para pérdidas por fiebre
+        }
+    
+        function calculateInsensibleLoss(peso, horas) {
+            return (0.5 * peso * horas).toFixed(2);
+        }
+    
+        function calculateEndogenousWater(horas) {
+            if (horas <= 20) {
+                return (horas * 20).toFixed(2);
+            } else if (horas >= 21 && horas <= 24) {
+                return 400;
+            }
+            return 0;
+        }
+    
+        // Guardar valores en el box seleccionado
+        function saveBoxData() {
+            const boxName = selectedBoxTitle.textContent;
+            if (boxName === "Ninguno") {
+                return;
+            }
+    
+            boxData[boxName].peso = parseFloat(pesoInput.value) || 0;
+            boxData[boxName].horas = parseFloat(horasInput.value) || 0;
+            boxData[boxName].fiebre37Horas = parseFloat(fiebre37HorasInput.value) || 0;
+            boxData[boxName].rpm25 = parseFloat(rpm25Input.value) || 0;
+            boxData[boxName].rpm35 = parseFloat(rpm35Input.value) || 0;
+    
+            updateUI(boxName);
+        }
+    
+        // Eventos de entrada
+        pesoInput.addEventListener("input", saveBoxData);
+        horasInput.addEventListener("input", saveBoxData);
+        fiebre37HorasInput.addEventListener("input", saveBoxData);
+        rpm25Input.addEventListener("input", saveBoxData);
+        rpm35Input.addEventListener("input", saveBoxData);
+    
+        // Evento para cambiar el box seleccionado
+        document.querySelectorAll(".box-link").forEach((link) => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+    
+                const boxName = link.dataset.box;
+    
+                // Actualizar UI con el box seleccionado
+                document.querySelectorAll(".box-link").forEach((link) => link.classList.remove("is-active"));
+                link.classList.add("is-active");
+                selectedBoxTitle.textContent = boxName;
+    
+                updateUI(boxName);
+            });
+        });
+    });
+    
+    <!--FORMULAS-->
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectedBoxTitle = document.getElementById("selected-box-title");
+            const pesoInput = document.getElementById("peso");
+            const horasInput = document.getElementById("horas");
+            const fiebre37HorasInput = document.getElementById("fiebre37Horas");
+            const fiebre37Output = document.getElementById("fiebre37");
+            const perdidasInsensiblesOutput = document.getElementById("perdidas-insensibles");
+            const aguaEndogenaOutput = document.getElementById("agua-endogena");
+            const rpm25Input = document.getElementById("rpm25");
+            const rpm35Input = document.getElementById("rpm35");
+        
+            const boxData = {};
+        
+            // Inicializar los datos de cada box
+            for (let i = 1; i <= 12; i++) {
+                const boxName = `Box ${i}`;
+                boxData[boxName] = {
+                    peso: 0,
+                    horas: 0,
+                    fiebre37Horas: 0,
+                    rpm25: 0,
+                    rpm35: 0,
+                };
+            }
+        
+            // Actualizar valores en la interfaz
+            function updateUI(boxName) {
+                const data = boxData[boxName];
+                pesoInput.value = data.peso || "";
+                horasInput.value = data.horas || "";
+                fiebre37HorasInput.value = data.fiebre37Horas || "";
+                fiebre37Output.value = calculateFeverLoss(data.fiebre37Horas);
+                perdidasInsensiblesOutput.value = calculateInsensibleLoss(data.peso, data.horas);
+                aguaEndogenaOutput.value = calculateEndogenousWater(data.horas);
+                rpm25Input.value = data.rpm25 || 0;
+                rpm35Input.value = data.rpm35 || 0;
+            }
+        
+            // Fórmulas de cálculo
+            function calculateFeverLoss(fiebre37Horas) {
+                return (fiebre37Horas * 3.3).toFixed(2); // Fórmula de ejemplo para pérdidas por fiebre
+            }
+        
+            function calculateInsensibleLoss(peso, horas) {
+                return (0.5 * peso * horas).toFixed(2);
+            }
+        
+            function calculateEndogenousWater(horas) {
+                if (horas <= 20) {
+                    return (horas * 20).toFixed(2);
+                } else if (horas >= 21 && horas <= 24) {
+                    return 400;
+                }
+                return 0;
+            }
+        
+            // Guardar valores en el box seleccionado
+            function saveBoxData() {
+                const boxName = selectedBoxTitle.textContent;
+                if (boxName === "Ninguno") {
+                    return;
+                }
+        
+                boxData[boxName].peso = parseFloat(pesoInput.value) || 0;
+                boxData[boxName].horas = parseFloat(horasInput.value) || 0;
+                boxData[boxName].fiebre37Horas = parseFloat(fiebre37HorasInput.value) || 0;
+                boxData[boxName].rpm25 = parseFloat(rpm25Input.value) || 0;
+                boxData[boxName].rpm35 = parseFloat(rpm35Input.value) || 0;
+        
+                updateUI(boxName);
+            }
+        
+            // Eventos de entrada
+            pesoInput.addEventListener("input", saveBoxData);
+            horasInput.addEventListener("input", saveBoxData);
+            fiebre37HorasInput.addEventListener("input", saveBoxData);
+            rpm25Input.addEventListener("input", saveBoxData);
+            rpm35Input.addEventListener("input", saveBoxData);
+        
+            // Evento para cambiar el box seleccionado
+            document.querySelectorAll(".box-link").forEach((link) => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+        
+                    const boxName = link.dataset.box;
+        
+                    // Actualizar UI con el box seleccionado
+                    document.querySelectorAll(".box-link").forEach((link) => link.classList.remove("is-active"));
+                    link.classList.add("is-active");
+                    selectedBoxTitle.textContent = boxName;
+        
+                    updateUI(boxName);
+                });
+            });
+        });
+        </script>
+        
+
+
+</body>
+</html>

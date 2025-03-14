@@ -1,0 +1,555 @@
+/* =============================== */
+/*          GENERAL STYLES         */
+/* =============================== */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+h1.title {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+section {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+
+
+/* =============================== */
+/*         BOX NAVIGATION          */
+/* =============================== */
+
+#box-navigation {
+    text-align: center;
+
+}
+
+.container__nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+}
+
+.container__nav ul li {
+    flex: 1 1 calc(8.33% - 10px); /* Ajuste dinámico para mantener filas */
+    text-align: center;
+}
+
+.container__nav ul li a {
+    display: block;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+
+}
+
+
+.container__nav ul li a:hover {
+    background-color: #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    
+}
+
+
+.container__nav ul li.selected a {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+/* =============================== */
+/*             DATOS              */
+/* =============================== */
+
+#box-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: #ededed;
+}
+
+#selected-box {
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.input-group .label {
+    font-weight: bold;
+}
+
+.input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+/* =============================== */
+/*             PERDIDAS           */
+/* =============================== */
+
+/* Ajustar el tamaño y separación de los inputs en las tablas de pérdidas e ingresos */
+.table__perdidas td input,
+.table__ingresos td input {
+    width: 90%; /* Mantener un tamaño uniforme */
+    margin: 5px 0; /* Separación vertical */
+    padding: 5px; /* Espaciado interno */
+    box-sizing: border-box; /* Incluir padding y bordes en el ancho total */
+}
+
+.table__perdidas td {
+    text-align: center; /* Centrar el contenido */
+}
+
+.table__perdidas td .input {
+    display: block; /* Forzar que cada input ocupe toda la línea */
+}
+
+/* Añadir espacio específico entre los inputs dentro de la misma celda */
+.table__perdidas td .input + .input,
+.table__ingresos td .input + .input {
+    margin-top: 5px; /* Espacio entre los inputs en la misma celda */
+}
+
+
+/* Redondear esquinas de las cajas de Pérdidas e Ingresos */
+/* Caja de Pérdidas */
+#box-losses {
+    background-color: #e3f2fd;
+    border-radius: 10px; /* Ajusta el valor para mayor o menor redondez */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añade una sombra suave si es necesario */
+}
+
+
+
+
+/* Espaciado adicional debajo de la tabla de pérdidas */
+#box-losses {
+    margin-bottom: 10px; /* Ajusta según sea necesario */
+}
+
+
+.container-perdidas-item {
+    margin: 0 auto;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    text-align: center;
+    animation: aparecer both;
+    animation-timeline: view();
+    animation-range: cover 10% contain 20%;
+}
+
+.table__perdidas {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto; /* Centra las tablas */
+    table-layout: fixed;
+
+
+}
+
+.table__perdidas th, .table__perdidas td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    
+}
+
+.table__perdidas th {
+    background-color: #bbdefb;
+    font-weight: bold;
+    text-align: center;
+
+}
+.table__perdidas th, .table__perdidas td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    width: 50%;
+
+}
+
+.input.perdida {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+/* Ajuste para los inputs */
+.table__perdidas .input {
+    width: 95%; /* Ajusta este valor según sea necesario */
+    margin: 0 auto;
+    display: block;
+}
+
+/* Alinear las columnas de concepto y valor */
+.table__perdidas th:first-child
+.table__perdidas td:first-child {
+    text-align: left;
+}
+
+.table__perdidas th:last-child, 
+.table__perdidas td:last-child {
+    text-align: right;
+}
+
+/* =============================== */
+/*             INGRESOS           */
+/* =============================== */
+
+/* Caja de Ingresos */
+
+#box-earings {
+    background-color: #fffde7;
+    padding-bottom: 20px; /* Espacio adicional para evitar cortes en el contenido */
+    margin-bottom: 175px; /* Espacio extra para separar esta sección de otros elementos */
+    
+}
+.container-ingresos-item {
+    margin: 0 auto;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    text-align: center;
+    animation: aparecer both;
+    animation-timeline: view();
+    animation-range: cover 10% contain 20%;
+}
+
+.table__ingresos {
+    width: 100%; /* Asegura que las tablas ocupen el ancho completo */
+    border-collapse: collapse;
+    margin: 0 auto; /* Centra las tablas */
+    table-layout: fixed;
+
+
+}
+
+.table__ingresos th, .table__ingresos td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    width: 50%;
+}
+
+.table__ingresos th {
+    background-color: #fff9c4;
+    width: 100%; /* Asegura que las tablas ocupen el ancho completo */
+    border-collapse: collapse;
+    margin: 0 auto; /* Centra las tablas */
+
+}
+
+.input.ingreso {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+/* Ajuste para los inputs */
+.table__ingresos .input {
+    width: 95%; /* Ajusta este valor según sea necesario */
+    margin: 0 auto;
+    display: block;
+}
+
+/* Alinear las columnas de concepto y valor */
+.table__ingresos th:first-child,.table__ingresos td:first-child {
+    text-align: left;
+}
+
+.table__ingresos th:last-child,.table__ingresos td:last-child {
+    text-align: right;
+}
+
+
+
+/* =============================== */
+/*       TOTALES Y BALANCES       */
+/* =============================== */
+
+#box-summary {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #d5ebe8;
+    border-top: 2px solid #ccc;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra hacia arriba */
+
+}
+
+.container__totales-item {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.table-summary th, .table-summary td {
+    padding: 5px;
+    text-align: left;
+}
+
+.input.readonly {
+    background-color: #f0f0f0;
+    border: none;
+    text-align: center;
+}
+
+
+
+
+/* =============================== */
+/*       AJUSTES PARA INPUTS       */
+/* =============================== */
+
+/* Aplicar un ancho consistente a todos los inputs */
+.input {
+    width: 95%; /* Ajustar para que todos tengan el mismo ancho */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px; /* Espaciado inferior para inputs apilados */
+}
+
+/* Para las celdas con múltiples inputs (en pérdidas) */
+.table__perdidas td input {
+    display: block; /* Asegura que los inputs se apilen verticalmente */
+    margin-bottom: 10px; /* Espaciado entre inputs */
+}
+
+.table__perdidas td input:last-child {
+    margin-bottom: 0; /* Evitar espaciado en el último input */
+}
+
+
+/* =============================== */
+/*             BUTTON             */
+/* =============================== */
+
+.button {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.button button {
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button button:hover {
+    background-color: #d32f2f;
+}
+
+/* =============================== */
+/*         CAMPOS READONLY         */
+/* =============================== */
+
+/* Estilo para campos readonly */
+input[readonly] {
+    pointer-events: none; /* Desactiva la interacción del puntero */
+    background-color: #f0f0f0; /* Fondo gris claro */
+    border: 1px solid #ddd; /* Borde fijo */
+    color: #666; /* Texto con un color más apagado */
+    text-align: center; /* Centra el texto */
+}
+
+/* Evita el enfoque en campos readonly */
+input[readonly]:focus {
+    outline: none; /* Quita el contorno de enfoque */
+    border: 1px solid #ddd; /* Mantén el borde sin cambios */
+}
+
+/*==============================*/
+/*     ANIMACIONES BALANCE      */
+/*==============================*/
+
+/*-----  ANIMACIONES BOX NAVIGATION  ----*/
+/*--Haz que los botones de navegación cambien suavemente de color cuando el usuario los pase con el mouse. Esto puede lograrse con la propiedad transition.--*/
+
+.container__nav ul li a:hover {
+    background-color: #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05); /* Efecto de zoom */
+    transition: all 0.3s ease-in-out;
+}
+
+/*  ------ANIMACIONES SECTION------*/
+/*--Usa una animación que deslice las secciones hacia arriba cuando carguen por primera vez.--*/
+
+section {
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*  ------ANIMACIONES INPUT READONLY------*/
+/*--Agrega un efecto pulsante a los valores totales para destacar cambios.--*/
+
+.input.readonly.balance-field {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    }
+}
+
+/*  ------ANIMACIONES INPUT------*/
+/*--Cuando un usuario hace clic en un campo de entrada, puedes agregar un efecto para destacarlo.--*/
+
+.input:focus {
+    outline: none;
+    border: 2px solid #4caf50;
+    box-shadow: 0 0 10px rgba(0, 200, 0, 0.5);
+    transition: all 0.3s;
+}
+
+
+/*  ------ANIMACIONES PERDIDAS------*/
+/*--Agrega un efecto de sombreado suave a las filas cuando el usuario las pase.--*/
+.table__perdidas tbody tr:hover {
+    background-color: #f0f8ff;
+    transition: background-color 0.3s;
+}
+/*---Aplica un efecto para que las tablas aparezcan gradualmente.--*/
+.table__perdidas {
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/*  ------ANIMACIONES INGRESOS------*/
+/*--Agrega un efecto de sombreado suave a las filas cuando el usuario las pase.--*/
+.table__ingresos tbody tr:hover {
+    background-color: #f0f8ff;
+    transition: background-color 0.3s;
+}
+/*---Aplica un efecto para que las tablas aparezcan gradualmente.--*/
+.table__ingresos {
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Define la animación básica para la entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px); /* Aparece desde abajo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Llega a su posición final */
+    }
+}
+
+/* Configura la línea de tiempo de desplazamiento para cada contenedor */
+#box-navigation, #box-data, #box-losses, #box-earings, #box-summary {
+    scroll-timeline-name: fadeTimeline; /* Línea de tiempo común */
+    scroll-timeline-axis: block; /* Basado en desplazamiento vertical */
+    scroll-timeline-scope: auto; /* Se ajusta al área visible */
+    opacity: 0; /* Empiezan ocultos */
+    animation: fadeInUp 1s linear both; /* Animación aplicada */
+    animation-timeline: fadeTimeline; /* Se activa al entrar en viewport */
+    animation-range: auto; /* Determina cuándo se activa la animación */
+}
+
+/*----ANIMACIONES-----*/
+
+@keyframes header-movement {
+    from {
+        padding: 20px 0;
+        background-color: #fff;
+    }
+    to {
+        padding: 0;
+        background-color: #10163266;
+        color: #fff;
+
+    }
+}
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
