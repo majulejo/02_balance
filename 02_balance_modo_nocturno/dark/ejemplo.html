@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplos de Input Number Personalizado</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-LnYH8RcZ1XGlX+8O9X/2iTTC5m9Us99VXknlbwaXv8RWy7eC20CrsqGyLaNHVDUwhmuMJGGUAYPb0w5D5mxFDA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    h2 {
+      margin-top: 60px;
+      color: #333;
+    }
+
+    .number-input {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 40px;
+    }
+
+    .number-input input[type="number"] {
+      width: 70px;
+      padding: 6px;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+
+      -moz-appearance: textfield;
+    }
+
+    .number-input input::-webkit-outer-spin-button,
+    .number-input input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .number-input button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    /* Estilo del ejemplo 1 */
+    .style-basic button {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .style-basic button:hover {
+      background-color: #388e3c;
+    }
+
+    /* Estilo del ejemplo 2 */
+    .style-modern button {
+      background-color: #FF9800;
+      color: white;
+    }
+
+    .style-modern button:hover {
+      background-color: #e67e22;
+    }
+
+    /* Estilo del ejemplo 3 con FontAwesome */
+    .style-icons button {
+      background-color: #007BFF;
+      color: white;
+      border-radius: 50%;
+      padding: 10px;
+    }
+
+    .style-icons button:hover {
+      background-color: #0056b3;
+    }
+
+    .style-icons i {
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>1. Ejemplo Básico con Flechas ▲▼</h2>
+  <div class="number-input style-basic">
+    <button onclick="changeValue('basic', -1)">&#x25BC;</button>
+    <input type="number" id="input-basic" value="0" min="0" max="100">
+    <button onclick="changeValue('basic', 1)">&#x25B2;</button>
+  </div>
+
+  <h2>2. Ejemplo Moderno con Botones de Color</h2>
+  <div class="number-input style-modern">
+    <button onclick="changeValue('modern', -1)">-</button>
+    <input type="number" id="input-modern" value="0" min="0" max="100">
+    <button onclick="changeValue('modern', 1)">+</button>
+  </div>
+
+  <h2>3. Ejemplo con Font Awesome + Google Fonts</h2>
+  <div class="number-input style-icons">
+    <button onclick="changeValue('icon', -1)"><i class="fas fa-minus"></i></button>
+    <input type="number" id="input-icon" value="0" min="0" max="100">
+    <button onclick="changeValue('icon', 1)"><i class="fas fa-plus"></i></button>
+  </div>
+
+  <script>
+    function changeValue(type, delta) {
+      const inputId = {
+        basic: 'input-basic',
+        modern: 'input-modern',
+        icon: 'input-icon'
+      }[type];
+
+      const input = document.getElementById(inputId);
+      let current = parseInt(input.value) || 0;
+      const min = parseInt(input.min) || -Infinity;
+      const max = parseInt(input.max) || Infinity;
+
+      const newValue = Math.min(Math.max(current + delta, min), max);
+      input.value = newValue;
+    }
+  </script>
+
+</body>
+</html>

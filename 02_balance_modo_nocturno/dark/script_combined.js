@@ -161,6 +161,30 @@ balanceTotalField.value = balanceTotal.toFixed(2);
             calculateDerivedValues();
         });
     });
+    
+// Restricciones de valores entre 0 y 24 para los campos específicos
+const restrictedInputs = [
+    "#horas-desde-ingreso-box",
+    "#fiebre37-horas-box",
+    "#fiebre38-horas-box",
+    "#fiebre39-horas-box",
+    "#rpm25-horas-box",
+    "#rpm35-horas-box"
+];
+
+restrictedInputs.forEach(selector => {
+    const input = document.querySelector(selector);
+    if (input) {
+        input.addEventListener("input", () => {
+            let value = parseInt(input.value, 10);
+            if (isNaN(value) || value < 0) {
+                input.value = 0;
+            } else if (value > 24) {
+                input.value = 24;
+            }
+        });
+    }
+});
 
     const deleteButtons = document.querySelectorAll("button#borrar-datos");
     deleteButtons.forEach(button => {

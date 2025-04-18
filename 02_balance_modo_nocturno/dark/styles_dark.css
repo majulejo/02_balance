@@ -12,7 +12,7 @@
 --hover: #ababab66;
 --light-hover: #d6edfb;
 --hover-input: #989797;
---summary-dark: #10163266;
+--summary-dark: #a5a5a7;
 --borde: #8d8d8d;
 --dark-shadow: #e1e1e114;
 --light-shadow:  #00000011;
@@ -421,6 +421,7 @@ section {   /*--CAJA NAVIGATION  --*/
     gap: 30px;
     margin: 0 auto;
     margin-top: 40px;
+    padding-bottom: 15px;
 
 }
 
@@ -534,7 +535,7 @@ input[readonly]:focus {
 }
 /*--nuevo--*/
 input[type="number"] {
-    width: 100%;
+    width: 90%;
     padding: 5px;
     color: var(--texto-1);
 }
@@ -868,7 +869,7 @@ body.active .input-group .label {
 /*-----OPACIDAD CAJAS dark         */
 /* =============================== */
 body.active .disabled {
-    background-color: #10163266;
+    background-color: var(--summary-dark);
     color: #fff;
 }
 
@@ -915,6 +916,10 @@ body.active .table__perdidas td .input {
 body.active .table__perdidas td .input:hover {
     background-color: var(--hover-input);
     color: #fff;
+}
+body.active .table__perdidas td .input + .input { 
+    background-color: var(--fondo-1);
+    border: 1px solid var(--borde);
 }
 body.active .table__perdidas td:hover {
     background-color: var(--hover);
@@ -1068,7 +1073,7 @@ body.active .button button:hover {
 /* =============================== */
 
 body.active input[readonly] {
-    background-color: #10163266;
+    background-color: var(--summary-dark);
     color:var(--texto-2);
     border: 1px solid var(--borde);
     text-align: center; 
@@ -1177,3 +1182,20 @@ body.active #box-losses:hover {
     box-shadow: 0 4px 10px var(--dark-shadow);
 }
 
+
+
+/* Quitar los spinners en Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"] {
+    accent-color: red;
+  }
+  
