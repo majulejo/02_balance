@@ -1,3 +1,4 @@
+// --- script_combined.js ---
 document.addEventListener("DOMContentLoaded", () => {
     // Variables globales
     const pesoInput = document.querySelector("#peso-box");
@@ -17,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let boxSeleccionado = false;
 
-    // Función para verificar si habilitar las secciones de pérdidas e ingresos
     function verificarHabilitacion() {
         const pesoValido = pesoInput && pesoInput.value.trim() !== "";
         const horasDesdeIngresoValido = horasDesdeIngresoInput && horasDesdeIngresoInput.value.trim() !== "";
@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Función para guardar los datos del box actual
     function saveCurrentBoxData(boxNumber) {
         const data = {};
         allInputs.forEach(input => {
@@ -40,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         boxData[boxNumber] = data;
     }
 
-    // Función para cargar los datos de un box seleccionado
     function loadBoxData(boxNumber) {
         const data = boxData[boxNumber] || {};
         allInputs.forEach(input => {
@@ -48,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Función para calcular valores basados en las fórmulas
     function calculateDerivedValues() {
         const getValue = (id) => parseFloat(document.querySelector(id)?.value) || 0;
 
@@ -80,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const enteral = getValue("#ingreso-enteral-box");
         const parenteral = getValue("#ingreso-parenteral-box");
 
-        // Calcular valores derivados
         const calculoFiebre37 = peso * 0.1 * fiebre37Horas;
         const calculoFiebre38 = peso * 0.2 * fiebre38Horas;
         const calculoFiebre39 = peso * 0.3 * fiebre39Horas;
@@ -89,13 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const perdidasInsensibles = peso * 0.5 * horasDesdeIngreso;
         const calculoVomitosSudor = vomitosSudor + calculoFiebre37 + calculoFiebre38 + calculoFiebre39 + calculoRpm25 + calculoRpm35;
         const totalPerdidas = diuresis + sng + hdfvvc + drenajes + perdidasInsensibles + calculoVomitosSudor;
-        const balancePerdidas = diuresis + sng + hdfvvc + drenajes + perdidasInsensibles + calculoVomitosSudor;
+        const balancePerdidas = totalPerdidas;
         const aguaEndogena = horasDesdeIngreso > 20 ? 400 : 20 * horasDesdeIngreso;
         const totalIngresos = midazolam + fentanest + propofol + remifentanilo + dexdor + noradrenalina + insulina + sueroterapia1 + sueroterapia2 + sueroterapia3 + medicacion + sangrePlasma + aguaEndogena + oral + enteral + parenteral;
-        const balanceIngresos = midazolam + fentanest + propofol + remifentanilo + dexdor + noradrenalina + insulina + sueroterapia1 + sueroterapia2 + sueroterapia3 + medicacion + sangrePlasma + aguaEndogena + oral + enteral + parenteral;
+        const balanceIngresos = totalIngresos;
         const balanceTotal = totalIngresos - totalPerdidas;
 
-        // Actualizar campos de Totales y Balances
         const updateTextContent = (id, value) => {
             const element = document.querySelector(id);
             if (element) element.textContent = value.toFixed(2);
@@ -105,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updateTextContent("#total-perdidas-balance", totalPerdidas);
         updateTextContent("#balance-total", balanceTotal);
 
-        // Asignar valores calculados a los inputs específicos
         const setValue = (id, value) => {
             const input = document.querySelector(id);
             if (input) input.value = value.toFixed(2);
@@ -124,47 +118,43 @@ document.addEventListener("DOMContentLoaded", () => {
         setValue("#resumen-total-ingresos-box", totalIngresos);
         setValue("#balance-total-ingresos-box", balanceIngresos);
 
-        // Cambiar color del campo Balance Total
         const balanceTotalField = document.querySelector("#balance-total-box");
         if (balanceTotalField) {
-            balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#0074ff" : "#f51d1d"; // Azul claro para positivo, rojo claro para negativo
-            balanceTotalField.style.color = "black"; // Asegura que el texto sea siempre visible
-            balanceTotalField.style.fontWeight = "bold"; // Resalta el texto
-            balanceTotalField.value = balanceTotal.toFixed(2); // Asegura que el valor sea visible y actualizado
+            const isDarkMode = document.body.classList.contains('active');
+        
+            if (isDarkMode) {
+                // Colores más suaves en modo oscuro
+                balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#3399ff" : "#cc4444"; // Azul apagado y rojo apagado
+            } else {
+                // Colores intensos en modo claro
+                balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#0074ff" : "#f51d1d";
+            }
+        
+            balanceTotalField.style.color = "#545352";
+balanceTotalField.style.fontWeight = "bold";
+balanceTotalField.value = balanceTotal.toFixed(2);
+
         }
+        
     }
 
-    // Iterar sobre cada enlace y agregar un evento click
     boxLinks.forEach(link => {
         link.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+            event.preventDefault();
 
-            // Guardar los datos del box actual antes de cambiar
             const currentBox = selectedBoxElement.getAttribute("data-current-box");
-            if (currentBox) {
-                saveCurrentBoxData(currentBox);
-            }
+            if (currentBox) saveCurrentBoxData(currentBox);
 
-            // Obtener el número de box desde el atributo data-box
             const boxNumber = link.getAttribute("data-box");
-
-            // Cargar los datos del nuevo box
             loadBoxData(boxNumber);
-
-            // Actualizar el texto del elemento seleccionado
             selectedBoxElement.textContent = `Has seleccionado el Box ${boxNumber}`;
             selectedBoxElement.setAttribute("data-current-box", boxNumber);
-
-            // Marcar como box seleccionado
             boxSeleccionado = true;
-
-            // Recalcular valores
             verificarHabilitacion();
             calculateDerivedValues();
         });
     });
 
-    // Agregar eventos de input para recalcular los valores derivados
     allInputs.forEach(input => {
         input.addEventListener("input", () => {
             verificarHabilitacion();
@@ -172,51 +162,66 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Botones para borrar los datos del box actual
     const deleteButtons = document.querySelectorAll("button#borrar-datos");
     deleteButtons.forEach(button => {
         button.addEventListener("click", (event) => {
             event.preventDefault();
             const currentBox = selectedBoxElement.getAttribute("data-current-box");
             if (currentBox) {
-                // Limpiar los datos almacenados para el box actual
                 boxData[currentBox] = {};
-
-                // Limpiar los valores visibles en los inputs
-                allInputs.forEach(input => {
-                    input.value = "";
-                });
-
-                // Recalcular valores
+                allInputs.forEach(input => input.value = "");
                 calculateDerivedValues();
             }
         });
     });
 
-    // Lógica específica para el nuevo botón "Borrar Datos Principal"
     const mainDeleteButton = document.querySelector("#borrar-datos-principal");
     if (mainDeleteButton) {
         mainDeleteButton.addEventListener("click", (event) => {
             event.preventDefault();
             const currentBox = selectedBoxElement.getAttribute("data-current-box");
             if (currentBox) {
-                // Limpiar los datos almacenados para el box actual
                 boxData[currentBox] = {};
-
-                // Limpiar los valores visibles en los inputs
-                allInputs.forEach(input => {
-                    input.value = "";
-                });
-
-                // Recalcular valores
+                allInputs.forEach(input => input.value = "");
                 calculateDerivedValues();
             }
-
-            // Mostrar mensaje adicional o realizar otras acciones
             alert("Datos del Box borrados correctamente");
         });
     }
 
-    // Verificar habilitación inicial al cargar la página
     verificarHabilitacion();
 });
+
+// --- dark.js ---
+const switchElement = document.querySelector(".switch");
+cargarDarkModeDesdeLocalStorage();
+
+document.addEventListener('DOMContentLoaded', () => {
+    switchElement.addEventListener("click", toggleDarkMode);
+});
+
+function toggleDarkMode() {
+    switchElement.classList.toggle("active");
+    document.body.classList.toggle('active');
+    guardarDarkModeEnLocalStorage(switchElement.classList.contains('active'));
+}
+
+function guardarDarkModeEnLocalStorage(estado) {
+    localStorage.setItem('darkMode', estado);
+}
+
+function cargarDarkModeDesdeLocalStorage() {
+    const darkModeGuardado = localStorage.getItem('darkMode') === 'true';
+    if (darkModeGuardado) {
+        switchElement.classList.add("active");
+        document.body.classList.add('active');
+    }
+}
+
+// --- menu.js ---
+const btn_menu = document.querySelector(".btn-menu"),
+    menu_options = document.querySelector(".menu-options");
+
+btn_menu.onclick = () => {
+    menu_options.classList.toggle("active");
+}

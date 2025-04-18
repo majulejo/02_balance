@@ -264,13 +264,13 @@ section {   /*--CAJA NAVIGATION  --*/
 .table__perdidas td .input + .input { 
     margin-top: 5px; 
     background-color: var(--losses-bc);
-    border: 1px solid var(--losses-borde);
+    border: 1px solid var(--borde);
     border-radius: 5px;
 }
 
 .table__perdidas .input {  
     background-color: var(--losses-bc);
-    border: 1px solid var(--losses-borde);
+    border: 1px solid var(--borde);
     width: 95%;
     margin: 0 auto;
     padding: 5px;
@@ -439,6 +439,7 @@ section {   /*--CAJA NAVIGATION  --*/
     color: var(--texto-1); /* Asegura que el texto sea visible */
     text-align: center; /* Centra el texto si es necesario */
     font-weight: bold; /* Resalta el texto */
+    font-size: 1.2rem !important;
 
 }
 
@@ -827,11 +828,9 @@ body.active #box-navigation {
 }
 body.active .container__nav ul {
     background-color: var(--fondo-1);
-    color: #fff;
 }
 body.active .container__nav ul li {
     background-color: var(--fondo-1);
-    color: #fff;
 }
 body.active .container__nav ul li a {
     background-color: var(--fondo-1);
@@ -859,7 +858,7 @@ body.active .input-group {
     background-color: var(--fondo-1);
 }
 body.active .input-group .label {
-    color: var(--label);
+    color: var(--texto-1);
 }
 
 /* =============================== */
@@ -968,19 +967,19 @@ body.active .table__ingresos td .input{
 
 body.active .table__ingresos td .input:hover {
     background-color: var(--hover-input);
-    color: var(--texto-2);
+    color: var(--label);
 }   
 body.active .table__ingresos th:hover {
     background-color: var(--hover-input);
-    color: var(--texto-2);
+    color: var(--label);
 }       
 body.active .table__ingresos tfoot tr:hover td {
     background-color: var(--hover-input);
-    color: var(--texto-2);
+    color: var(--label);
 }
 
 body.active .table__ingresos .input{
-    border: 1px solid --borde;
+    border: 1px solid var(--borde);
     background-color: var(--fondo-1); 
 }
 body.active .table__ingresos th:first-child,.table__ingresos td:first-child {
@@ -1015,13 +1014,13 @@ body.active .table-summary th, .table-summary td {
 }
 body.active .input.readonly {
     background-color: var(--summary-dark);
-    color: #a1a1a1;
+    color: var(--body);
 }
 body.active #balance-total-box {
     background-color: var(--summary-dark);
     color: var(--texto-2);
-    text-align: center; /* Centra el texto si es necesario */
-    font-weight: bold; /* Resalta el texto */
+    text-align: center; 
+    font-weight: bold; 
 }
 /* =============================== */
 /*       AJUSTES PARA INPUTS       */
@@ -1037,7 +1036,7 @@ body.active .input {   /*--input peso y horas de   --*/
 /*             BUTTON             */
 /* =============================== */
 body.active #borrar-datos-principal{
-    background-color: var(--fondo-1);
+    background-color: var(--button);
     color: var(--texto-1);
     border: 1px solid transparent;
 
