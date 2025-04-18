@@ -38,6 +38,8 @@
 * {
     box-sizing: border-box;
     outline: none;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
 }
 
 body {
@@ -208,7 +210,7 @@ section {   /*--CAJA NAVIGATION  --*/
     box-shadow: 0 2px 4px var(--light-shadow); 
     padding-bottom: 20px; 
     border-radius: 10px;
-    margin-bottom: 175px; 
+    margin-bottom: 180px; 
 }
 
 .container-perdidas-item {
@@ -305,7 +307,7 @@ section {   /*--CAJA NAVIGATION  --*/
     box-shadow: 0 2px 4px var(--light-shadow); 
     padding-bottom: 20px; 
     border-radius: 10px;
-    margin-bottom: 175px; 
+    margin-bottom: 180px; 
 }
 
 .container-ingresos-item {/*--caja ingresos--*/
@@ -315,7 +317,7 @@ section {   /*--CAJA NAVIGATION  --*/
     animation: aparecer both;
     animation-timeline: view();
     animation-range: cover 10% contain 20%;
-    margin-bottom: 75px;   
+    margin-bottom: 85px;   
 }
 .table__ingresos {
     width: 100%;    
@@ -431,12 +433,6 @@ section {   /*--CAJA NAVIGATION  --*/
 
 }
 
-.input.readonly {  /*--PI, VSFT,TP,,,,AE,TI,,,,TI,TP,BA--*/
-    background-color: var(--summary); 
-    border: none;
-    text-align: center;  
-
-}
 
 #balance-total-box {
     background-color: inherit; /* Color de fondo definido por JavaScript */
@@ -453,16 +449,34 @@ section {   /*--CAJA NAVIGATION  --*/
 /* =============================== */
 /*       AJUSTES PARA INPUTS       */
 /* =============================== */
-
-.input {   /*--input peso y horas de   --*/
-    width: 95%;
-    padding: 5px;
-    border: 1px solid var(--losses-borde);
-    border-radius: 5px;
-    margin-bottom: 5px; 
+/* Estilo base de inputs */
+.input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: 2px solid var(--borde-input, #ccc);
+    font-size: 1rem;
+    background-color: var(--bg-input, #fff);
+    color: var(--texto-input, #000);
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     text-align: center;
-    background-color: var(--body);
 }
+
+/* Al enfocar el input */
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Inputs readonly */
+.input.readonly {
+    background-color: var(--bg-readonly, #eee);
+    color: var(--texto-readonly, #666);
+    border-color: #ccc;
+}
+
 
 .table__perdidas td input {  /*--  input perdidas --*/
     display: block; 
@@ -499,7 +513,7 @@ section {   /*--CAJA NAVIGATION  --*/
 
 .button {
     text-align: center;
-    margin: 20px 0;
+    margin: 10px 0 30px 0;
 }
 
 .button button {
@@ -535,7 +549,8 @@ input[readonly]:focus {
 }
 /*--nuevo--*/
 input[type="number"] {
-    width: 90%;
+    font-size: .8rem;
+    width: 100%;
     padding: 5px;
     color: var(--texto-1);
 }
