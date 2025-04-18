@@ -1,52 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Seleccionar todos los enlaces dentro de los boxes
-    const boxLinks = document.querySelectorAll("#box-navigation ul li a");
-
-    // Seleccionar el elemento donde se mostrará el box seleccionado
+    // Variables globales
+    const pesoInput = document.querySelector("#peso-box");
+    const horasDesdeIngresoInput = document.querySelector("#horas-desde-ingreso-box");
+    const boxLosses = document.querySelector("#box-losses");
+    const boxEarings = document.querySelector("#box-earings");
     const selectedBoxElement = document.querySelector("#selected-box h2");
+    const boxLinks = document.querySelectorAll("#box-navigation ul li a");
+    const allInputs = document.querySelectorAll("input");
 
     // Objeto para almacenar los datos de cada box
     const boxData = {};
 
-    // Seleccionar todas las secciones que necesitan opacidad
-    const seccionesPerdidasIngresos = document.querySelectorAll("#perdidas, #ingresos");
+    // Aplicar clase 'disabled' al inicio
+    boxLosses.classList.add("disabled");
+    boxEarings.classList.add("disabled");
 
-    // Seleccionar los inputs necesarios
-    const pesoInput = document.querySelector("#peso-box");
-    const horasDesdeIngresoInput = document.querySelector("#horas-desde-ingreso-box");
+    let boxSeleccionado = false;
 
-    // Inicialmente aplicar opacidad a las secciones de pérdidas e ingresos
-    seccionesPerdidasIngresos.forEach(section => {
-        section.style.opacity = "0.3";
-        section.style.pointerEvents = "none"; // Deshabilitar interacción
-    });
-
-    // Función para verificar si se puede habilitar las secciones
+    // Función para verificar si habilitar las secciones de pérdidas e ingresos
     function verificarHabilitacion() {
         const pesoValido = pesoInput && pesoInput.value.trim() !== "";
         const horasDesdeIngresoValido = horasDesdeIngresoInput && horasDesdeIngresoInput.value.trim() !== "";
 
-        if (pesoValido && horasDesdeIngresoValido) {
-            // Quitar opacidad y habilitar interacción
-            seccionesPerdidasIngresos.forEach(section => {
-                section.style.opacity = "1";
-                section.style.pointerEvents = "auto";
-            });
+        if (pesoValido && horasDesdeIngresoValido && boxSeleccionado) {
+            boxLosses.classList.remove("disabled");
+            boxEarings.classList.remove("disabled");
         } else {
-            // Mantener opacidad y deshabilitar interacción
-            seccionesPerdidasIngresos.forEach(section => {
-                section.style.opacity = "0.3";
-                section.style.pointerEvents = "none";
-            });
+            boxLosses.classList.add("disabled");
+            boxEarings.classList.add("disabled");
         }
     }
-
-    // Agregar eventos para verificar en tiempo real
-    pesoInput?.addEventListener("input", verificarHabilitacion);
-    horasDesdeIngresoInput?.addEventListener("input", verificarHabilitacion);
-
-    // Seleccionar todos los inputs dinámicamente
-    const allInputs = document.querySelectorAll("input");
 
     // Función para guardar los datos del box actual
     function saveCurrentBoxData(boxNumber) {
@@ -77,12 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const rpm25Horas = getValue("#rpm25-horas-box");
         const rpm35Horas = getValue("#rpm35-horas-box");
         const vomitosSudor = getValue("#perdida-vomitos-box");
-
         const diuresis = getValue("#perdida-orina-box");
         const sng = getValue("#perdida-sng-box");
         const hdfvvc = getValue("#perdida-hdfvvc-box");
         const drenajes = getValue("#perdida-drenajes-box");
-
         const midazolam = getValue("#ingreso-midazolam-box");
         const fentanest = getValue("#ingreso-fentanest-box");
         const propofol = getValue("#ingreso-propofol-box");
@@ -107,14 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const calculoRpm35 = peso * 0.3 * rpm35Horas;
         const perdidasInsensibles = peso * 0.5 * horasDesdeIngreso;
         const calculoVomitosSudor = vomitosSudor + calculoFiebre37 + calculoFiebre38 + calculoFiebre39 + calculoRpm25 + calculoRpm35;
-
         const totalPerdidas = diuresis + sng + hdfvvc + drenajes + perdidasInsensibles + calculoVomitosSudor;
         const balancePerdidas = diuresis + sng + hdfvvc + drenajes + perdidasInsensibles + calculoVomitosSudor;
-
         const aguaEndogena = horasDesdeIngreso > 20 ? 400 : 20 * horasDesdeIngreso;
         const totalIngresos = midazolam + fentanest + propofol + remifentanilo + dexdor + noradrenalina + insulina + sueroterapia1 + sueroterapia2 + sueroterapia3 + medicacion + sangrePlasma + aguaEndogena + oral + enteral + parenteral;
         const balanceIngresos = midazolam + fentanest + propofol + remifentanilo + dexdor + noradrenalina + insulina + sueroterapia1 + sueroterapia2 + sueroterapia3 + medicacion + sangrePlasma + aguaEndogena + oral + enteral + parenteral;
-
         const balanceTotal = totalIngresos - totalPerdidas;
 
         // Actualizar campos de Totales y Balances
@@ -146,17 +124,14 @@ document.addEventListener("DOMContentLoaded", () => {
         setValue("#resumen-total-ingresos-box", totalIngresos);
         setValue("#balance-total-ingresos-box", balanceIngresos);
 
-
         // Cambiar color del campo Balance Total
-        // Cambiar color y mostrar el contenido del campo Balance Total
-const balanceTotalField = document.querySelector("#balance-total-box");
-if (balanceTotalField) {
-    balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#0074ff" : "#f51d1d"; // Azul claro para positivo, rojo claro para negativo
-    balanceTotalField.style.color = "black"; // Asegura que el texto sea siempre visible
-    balanceTotalField.style.fontWeight = "bold"; // Resalta el texto
-    balanceTotalField.value = balanceTotal.toFixed(2); // Asegura que el valor sea visible y actualizado
-}
-
+        const balanceTotalField = document.querySelector("#balance-total-box");
+        if (balanceTotalField) {
+            balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#0074ff" : "#f51d1d"; // Azul claro para positivo, rojo claro para negativo
+            balanceTotalField.style.color = "black"; // Asegura que el texto sea siempre visible
+            balanceTotalField.style.fontWeight = "bold"; // Resalta el texto
+            balanceTotalField.value = balanceTotal.toFixed(2); // Asegura que el valor sea visible y actualizado
+        }
     }
 
     // Iterar sobre cada enlace y agregar un evento click
@@ -180,38 +155,21 @@ if (balanceTotalField) {
             selectedBoxElement.textContent = `Has seleccionado el Box ${boxNumber}`;
             selectedBoxElement.setAttribute("data-current-box", boxNumber);
 
+            // Marcar como box seleccionado
+            boxSeleccionado = true;
+
             // Recalcular valores
+            verificarHabilitacion();
             calculateDerivedValues();
         });
     });
 
     // Agregar eventos de input para recalcular los valores derivados
     allInputs.forEach(input => {
-        input.addEventListener("input", calculateDerivedValues);
-    });
-
-    // Restricciones de valores entre 0 y 24 para los campos específicos
-    const restrictedInputs = [
-        "#horas-desde-ingreso-box",
-        "#fiebre37-horas-box",
-        "#fiebre38-horas-box",
-        "#fiebre39-horas-box",
-        "#rpm25-horas-box",
-        "#rpm35-horas-box"
-    ];
-
-    restrictedInputs.forEach(selector => {
-        const input = document.querySelector(selector);
-        if (input) {
-            input.addEventListener("input", () => {
-                let value = parseInt(input.value, 10);
-                if (isNaN(value) || value < 0) {
-                    input.value = 0;
-                } else if (value > 24) {
-                    input.value = 24;
-                }
-            });
-        }
+        input.addEventListener("input", () => {
+            verificarHabilitacion();
+            calculateDerivedValues();
+        });
     });
 
     // Botones para borrar los datos del box actual
@@ -261,45 +219,4 @@ if (balanceTotalField) {
 
     // Verificar habilitación inicial al cargar la página
     verificarHabilitacion();
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const pesoInput = document.querySelector("#peso-box");
-    const horasDesdeIngresoInput = document.querySelector("#horas-desde-ingreso-box");
-    const boxLosses = document.querySelector("#box-losses");
-    const boxEarings = document.querySelector("#box-earings");
-    const selectedBoxElement = document.querySelector("#selected-box h2");
-    const boxLinks = document.querySelectorAll("#box-navigation ul li a");
-
-    // Aplicar clase 'disabled' al inicio
-    boxLosses.classList.add("disabled");
-    boxEarings.classList.add("disabled");
-
-    let boxSeleccionado = false;
-
-    // Función para verificar si habilitar los inputs
-    function verificarHabilitacion() {
-        const pesoValido = pesoInput.value.trim() !== "";
-        const horasDesdeIngresoValido = horasDesdeIngresoInput.value.trim() !== "";
-
-        if (pesoValido && horasDesdeIngresoValido && boxSeleccionado) {
-            boxLosses.classList.remove("disabled");
-            boxEarings.classList.remove("disabled");
-        } else {
-            boxLosses.classList.add("disabled");
-            boxEarings.classList.add("disabled");
-        }
-    }
-
-    // Detectar selección de un box
-    boxLinks.forEach(link => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            boxSeleccionado = true;
-            verificarHabilitacion();
-        });
-    });
-
-    // Agregar eventos a los inputs para detectar cambios
-    pesoInput.addEventListener("input", verificarHabilitacion);
-    horasDesdeIngresoInput.addEventListener("input", verificarHabilitacion);
 });
