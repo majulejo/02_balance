@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
             if (isDarkMode) {
                 // Colores más suaves en modo oscuro
-                balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#3399ff" : "#cc4444"; // Azul apagado y rojo apagado
+                balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#7c8b9c" : "#917070"; // Azul apagado y rojo apagado
             } else {
                 // Colores intensos en modo claro
                 balanceTotalField.style.backgroundColor = balanceTotal >= 0 ? "#0074ff" : "#f51d1d";
