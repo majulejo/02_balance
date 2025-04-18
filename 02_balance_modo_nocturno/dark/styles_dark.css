@@ -163,7 +163,7 @@ section {   /*--CAJA NAVIGATION  --*/
 
 .input-group .label {   /*--  peso y horas desde ingreso--*/
     font-weight: bold;
-    margin: 0 auto;;
+    margin: 0 auto;
 }
 
 /* =============================== */
@@ -264,7 +264,7 @@ section {   /*--CAJA NAVIGATION  --*/
 .table__perdidas td .input + .input { 
     margin-top: 5px; 
     background-color: var(--losses-bc);
-    border: 1px solid var(--borde);
+    border: 1px solid var(--losses-borde);
     border-radius: 5px;
 }
 
@@ -453,7 +453,7 @@ section {   /*--CAJA NAVIGATION  --*/
 .input {   /*--input peso y horas de   --*/
     width: 95%;
     padding: 5px;
-    border: 1px solid var(--borde);
+    border: 1px solid var(--losses-borde);
     border-radius: 5px;
     margin-bottom: 5px; 
     text-align: center;
