@@ -229,6 +229,7 @@ section {   /*--CAJA NAVIGATION  --*/
     table-layout: fixed;
     padding: 0; 
     box-shadow: 0 4px 12px var(--light-shadow);
+
 }
 
 .table__perdidas td {  /*--TABLA PERDIDAS  MENOS READONLY, CO, VA Y TI--*/
@@ -346,7 +347,6 @@ section {   /*--CAJA NAVIGATION  --*/
     font-weight: bold;
     border-collapse: collapse;
 }
-
 .table__ingresos td .input {
     background-color: var(--earings-bc); 
     border: 1px solid var(--earings-borde);
@@ -1182,20 +1182,3 @@ body.active #box-losses:hover {
     box-shadow: 0 4px 10px var(--dark-shadow);
 }
 
-
-
-/* Quitar los spinners en Chrome, Safari, Edge */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-input[type="number"] {
-    accent-color: red;
-  }
-  
