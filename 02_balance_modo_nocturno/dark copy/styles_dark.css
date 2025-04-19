@@ -439,7 +439,7 @@ section {   /*--CAJA NAVIGATION  --*/
     color: var(--texto-1); /* Asegura que el texto sea visible */
     text-align: center; /* Centra el texto si es necesario */
     font-weight: bold; /* Resalta el texto */
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;
 
 }
 
@@ -550,7 +550,7 @@ input[readonly]:focus {
 /*--nuevo--*/
 input[type="number"] {
     font-size: .8rem;
-    width: 100%;
+    width: 90%;
     padding: 5px;
     color: var(--texto-1);
 }
