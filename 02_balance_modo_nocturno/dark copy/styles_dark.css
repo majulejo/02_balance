@@ -450,24 +450,27 @@ section {   /*--CAJA NAVIGATION  --*/
 /*       AJUSTES PARA INPUTS       */
 /* =============================== */
 /* Estilo base de inputs */
+
+/* Estilo base de inputs */
 .input {
     width: 100%;
     padding: 0.6rem;
     border-radius: 10px;
-    border: 2px solid var(--borde-input, #ccc);
+    border: 2px solid var(--borde);
     font-size: 1rem;
     background-color: var(--bg-input, #fff);
-    color: var(--texto-input, #000);
+    color: var(--texto-2);
     transition: all 0.3s ease;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 3px var(--light-shadow);
     text-align: center;
 }
-
 /* Al enfocar el input */
+
 .input:focus {
-    border-color: #007bff;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    border: 1px solid var(--borde);
+    box-shadow: 0 0 10px var(--light-shadow);
+    transition: all 0.3s;
 }
 
 /* Inputs readonly */
@@ -477,7 +480,7 @@ section {   /*--CAJA NAVIGATION  --*/
     border-color: #ccc;
 }
 
-
+/* ======================================================================= */
 .table__perdidas td input {  /*--  input perdidas --*/
     display: block; 
     margin-bottom: 10px; 
@@ -613,15 +616,8 @@ section {
     }
 }
 
-/*  ------ANIMACIONES INPUT------*/
-/*--Cuando un usuario hace clic en un campo de entrada, puedes agregar un efecto para destacarlo.--*/
 
-.input:focus {
-    outline: none;
-    border: 1px solid var(--borde);
-    box-shadow: 0 0 10px var(--light-shadow);
-    transition: all 0.3s;
-}
+
 
 
 /*  ------ANIMACIONES PERDIDAS------*/
@@ -768,6 +764,9 @@ section {
     }
 }
 @media (max-width: 768px) {
+    #box-earings {    
+        margin-bottom: 190px; 
+    }
     #box-data {
         margin: 0 auto; /* Centra la caja horizontalmente */
         width: 100%; /* Asegura que ocupe todo el ancho disponible */
