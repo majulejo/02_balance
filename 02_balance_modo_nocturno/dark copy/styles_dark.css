@@ -308,6 +308,7 @@ section {   /*--CAJA NAVIGATION  --*/
     padding-bottom: 20px; 
     border-radius: 10px;
     margin-bottom: 180px; 
+    color: var(--texto-2);
 }
 
 .container-ingresos-item {/*--caja ingresos--*/
