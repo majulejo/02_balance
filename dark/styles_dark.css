@@ -12,7 +12,6 @@
 --hover: #ababab66;
 --light-hover: #d6edfb;
 --hover-input: #989797;
---summary-dark: #a5a5a7;
 --borde: #8d8d8d;
 --dark-shadow: #e1e1e114;
 --light-shadow:  #00000011;
@@ -29,7 +28,11 @@
 --earings-cabecera-2: #fafad9;
 --earings-borde: #ececec;
 --earings-hover: #faf3c2;
+/* box summary */
 --summary: #ebf4f4;
+--summary-dark: #a5a5a7;
+--summary-bc: #EBF4F4;
+
 }
 
 
@@ -129,6 +132,7 @@ section {   /*--CAJA NAVIGATION  --*/
 #box-data {    /*--  CAJA DATA  --*/
     display: flex;
     background-color: var(--body); 
+    color: var(--texto-2);
     flex-direction: column;   
     width: 100%; 
     max-width: 1705px; 
@@ -141,9 +145,9 @@ section {   /*--CAJA NAVIGATION  --*/
 }
 
 
-#selected-box {   /*--box seleccionado:ninguno--*/
+#selected-box {   
     font-weight: bold;
-    color: var(--texto-1);
+    color: var(--texto-2);
     text-align: center;
     margin: 0 auto;;
 
@@ -296,6 +300,25 @@ section {   /*--CAJA NAVIGATION  --*/
     font-size: 1.2rem;
     text-align: center;
 }
+/* ======================================================================= */
+/*--  input perdidas --*/
+.table__perdidas td input {  
+    display: block; 
+    margin-bottom: 10px; 
+
+}
+.table__perdidas td input:last-child { /*--afecta a la parte inferior de cada celda en pérdidas  --*/
+    margin-bottom: 0;   
+}
+
+.table__perdidas tbody tr:hover td {
+    background-color: var(--light-hover);    
+    box-shadow: 0 1px 3px var(--light-shadow); 
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: var(--label) ; /* Texto negro más claro */
+}
+/* FINAL DE BOX LOSSES */
+
 
 /* =============================== */
 /*             INGRESOS           */
@@ -338,7 +361,9 @@ section {   /*--CAJA NAVIGATION  --*/
     padding: 10px 20px; 
     vertical-align: center;    
     font-weight: bold; 
+    color: var(--texto-2)
 }
+
 .table__ingresos th {
     background-color: var(--earings-cabecera-2);
     border: 1px solid var(--earings-borde);
@@ -352,12 +377,14 @@ section {   /*--CAJA NAVIGATION  --*/
 }
 .table__ingresos td .input {
     background-color: var(--earings-bc); 
+    color: var(--texto-2);
     border: 1px solid var(--earings-borde);
     width: 90%; 
     margin: 0 auto;
     padding: 5px; 
     border-radius: 5px;
     display: block; 
+    font-weight: bold;
 }
     
 .table__ingresos td .input + .input {    
@@ -393,8 +420,13 @@ section {   /*--CAJA NAVIGATION  --*/
     text-align: center;
 }
 
-
-
+.table__ingresos tbody tr:hover td {
+    background-color: var(--earings-hover); 
+    box-shadow: 0 1px 3px var(--light-shadow); /* Sombra ligera */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: var(--label) ; 
+}
+/* FINAL DE BOX-EARINGS */
 
 /* =============================== */
 /*       TOTALES Y BALANCES       */
@@ -433,7 +465,12 @@ section {   /*--CAJA NAVIGATION  --*/
     text-align: left;
 
 }
-
+/* Inputs readonly de  box summary*/
+.input.readonly {
+    background-color: var(--summary-bc);
+    color: var(--texto2);
+    border-color: var(--losses-borde);
+}
 
 #balance-total-box {
     background-color: inherit; /* Color de fondo definido por JavaScript */
@@ -441,10 +478,7 @@ section {   /*--CAJA NAVIGATION  --*/
     text-align: center; /* Centra el texto si es necesario */
     font-weight: bold; /* Resalta el texto */
     font-size: 1.2rem !important;
-
 }
-
-
 
 
 /* =============================== */
@@ -453,17 +487,18 @@ section {   /*--CAJA NAVIGATION  --*/
 /* Estilo base de inputs */
 
 /* Estilo base de inputs */
-.input {
+.input, .input perdida , .input ingreso {
     width: 100%;
     padding: 0.6rem;
     border-radius: 10px;
     border: 2px solid var(--borde);
     font-size: 1rem;
-    background-color: var(--bg-input, #fff);
+    background-color: transparent;
     color: var(--texto-2);
     transition: all 0.3s ease;
     box-shadow: inset 0 1px 3px var(--light-shadow);
     text-align: center;
+    font-weight: bold;
 }
 /* Al enfocar el input */
 
@@ -474,22 +509,9 @@ section {   /*--CAJA NAVIGATION  --*/
     transition: all 0.3s;
 }
 
-/* Inputs readonly */
-.input.readonly {
-    background-color: var(--bg-readonly, #eee);
-    color: var(--texto-readonly, #666);
-    border-color: #ccc;
-}
 
-/* ======================================================================= */
-.table__perdidas td input {  /*--  input perdidas --*/
-    display: block; 
-    margin-bottom: 10px; 
 
-}
-.table__perdidas td input:last-child { /*--afecta a la parte inferior de cada celda en pérdidas  --*/
-    margin-bottom: 0;   
-}
+
 
 
 /* =============================== */
@@ -642,20 +664,9 @@ section {
 /*--Agrega un efecto de sombreado suave a las filas cuando el usuario las pase.--*/
 /* Pérdidas */
 
-.table__perdidas tbody tr:hover td {
-    background-color: var(--light-hover);
-    color: var(--texto-1); 
-    box-shadow: 0 1px 3px var(--light-shadow); /* Sombra ligera */
-}
+
 /* Ingresos */
 
-.table__ingresos tbody tr:hover td {
-    background-color: var(--earings-hover); 
-    box-shadow: 0 1px 3px var(--light-shadow); /* Sombra ligera */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    color: var(--texto-1) ; /* Texto negro más claro */
-
-}
 
 /* Sombrea la última fila en "Total Ingresos" */
 #box-earings .table__ingresos tfoot tr:hover td, #box-earings .table__ingresos tfoot tr:hover th {
