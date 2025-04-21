@@ -5,9 +5,13 @@
 :root {
 /* dark */
 --texto-1: #272626;
---texto-2: #223253;
---label: #fff;
+--texto-2: #072664;
+--dark-1:#cecece;
+--dark-2:#908f8f;
+
+--label: #939393;
 --fondo-1: #a6a6a6;
+--fondo-2: #aeacac;
 --total-hover: #737373;
 --hover: #ababab66;
 --light-hover: #d6edfb;
@@ -60,8 +64,13 @@ body {
 /* Mantener el encabezado centrado */
 h1 {      
     text-align: center;
-    color: #333;
+    color: var(--texto-1);
     margin: 20px 0;
+    font-size: 1.2rem;
+}
+h1:hover {
+    transform: scale(1.3);
+    transition: all 0.6s ease;
 }
 /*-- para adaptarse a pantallas--*/
 
@@ -119,7 +128,8 @@ section {   /*--CAJA NAVIGATION  --*/
 }
 
 .container__nav ul li a:hover {
-    background-color: var(--light-hover); /* Fondo más claro */
+    background-color: var(--light-hover); 
+    color: var(--texto-2);
     box-shadow: 0 2px 4px var(--light-shadow); /* Sombra visible */
     transform: scale(1.1); /* Pequeño efecto de zoom */
     transition: all 0.3s ease; /* Animación suave */
@@ -215,6 +225,8 @@ section {   /*--CAJA NAVIGATION  --*/
     padding-bottom: 20px; 
     border-radius: 10px;
     margin-bottom: 180px; 
+    color: var(--texto-2);
+
 }
 
 .container-perdidas-item {
@@ -229,7 +241,7 @@ section {   /*--CAJA NAVIGATION  --*/
 
 .table__perdidas { 
     width: 100%;
-    height: 104%; 
+    height: 102.5%; 
     border-collapse: collapse;
     margin: 0 ;
     table-layout: fixed;
@@ -246,38 +258,50 @@ section {   /*--CAJA NAVIGATION  --*/
     padding: 10px 20px; 
     vertical-align: center;   
     font-weight: bold; 
+    color: var(--texto-2)
+
 }
 .table__perdidas th {
     background-color: var(--losses-cabecera-2);
     border: 1px solid var(--losses-borde);
     box-shadow: 0 4px 6px var(--light-shadow); 
-    text-align: left;
-    padding: 10px;
-    font-weight: bold;
     width: 100%; 
-    border-collapse: collapse;
     margin: 0 auto; 
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    border-collapse: collapse;
 }
-
+.table__perdidas tfoot th ,.table__perdidas tfoot td{
+    background-color: var(--losses-cabecera-2);
+    border: 1px solid var(--losses-borde);
+    color: var(--texto-2)
+}
+.table__perdidas tfoot th:hover ,.table__perdidas tfoot td:hover {
+    opacity: 0.6;
+}
 .table__perdidas td .input {  
     background-color: var(--losses-bc);
+    color: var(--texto-2);
     border: 1px solid var(--losses-borde);
     width: 90%; 
     margin: 0 auto;
     padding: 5px; 
     border-radius: 5px;
     display: block; 
+    font-weight: bold;
+
 }
 .table__perdidas td .input + .input { 
-    margin-top: 5px; 
     background-color: var(--losses-bc);
     border: 1px solid var(--losses-borde);
+    margin-top: 5px; 
     border-radius: 5px;
 }
 
 .table__perdidas .input {  
     background-color: var(--losses-bc);
-    border: 1px solid var(--borde);
+    border: 1px solid var(--losses-borde);
     width: 95%;
     margin: 0 auto;
     padding: 5px;
@@ -300,12 +324,10 @@ section {   /*--CAJA NAVIGATION  --*/
     font-size: 1.2rem;
     text-align: center;
 }
-/* ======================================================================= */
 /*--  input perdidas --*/
 .table__perdidas td input {  
     display: block; 
     margin-bottom: 10px; 
-
 }
 .table__perdidas td input:last-child { /*--afecta a la parte inferior de cada celda en pérdidas  --*/
     margin-bottom: 0;   
@@ -315,10 +337,9 @@ section {   /*--CAJA NAVIGATION  --*/
     background-color: var(--light-hover);    
     box-shadow: 0 1px 3px var(--light-shadow); 
     transition: background-color 0.3s ease, color 0.3s ease;
-    color: var(--label) ; /* Texto negro más claro */
+    color: var(--label) ; 
 }
-/* FINAL DE BOX LOSSES */
-
+/* FINAL DE BOX-LOSSES */
 
 /* =============================== */
 /*             INGRESOS           */
@@ -334,7 +355,7 @@ section {   /*--CAJA NAVIGATION  --*/
     color: var(--texto-2);
 }
 
-.container-ingresos-item {/*--caja ingresos--*/
+.container-ingresos-item {
     margin: 0 auto;
     max-width: 800px;
     text-align: center;
@@ -374,6 +395,14 @@ section {   /*--CAJA NAVIGATION  --*/
     text-align: left;
     font-weight: bold;
     border-collapse: collapse;
+}
+.table__ingresos tfoot th ,.table__ingresos tfoot td{
+    background-color: var(--earings-cabecera-2);
+    border: 1px solid var(--earings-borde);
+    color: var(--texto-2)
+}
+.table__ingresos tfoot th:hover ,.table__ingresos tfoot td:hover {
+    opacity: 0.6;
 }
 .table__ingresos td .input {
     background-color: var(--earings-bc); 
@@ -419,10 +448,17 @@ section {   /*--CAJA NAVIGATION  --*/
     font-size: 1.2rem;
     text-align: center;
 }
-
+/*--  input ingresos --*/
+.table__ingresos td input {  
+    display: block; 
+    margin-bottom: 10px; 
+}
+.table__ingresos td input:last-child { /*--afecta a la parte inferior de cada celda en ingresos  --*/
+    margin-bottom: 0;   
+}
 .table__ingresos tbody tr:hover td {
     background-color: var(--earings-hover); 
-    box-shadow: 0 1px 3px var(--light-shadow); /* Sombra ligera */
+    box-shadow: 0 1px 3px var(--light-shadow); 
     transition: background-color 0.3s ease, color 0.3s ease;
     color: var(--label) ; 
 }
@@ -564,16 +600,13 @@ section {   /*--CAJA NAVIGATION  --*/
 
 /* Estilo para campos readonly */
 input[readonly] {
-    pointer-events: none; /* Desactiva la interacción del puntero */
-    text-align: center; /* Centra el texto */
+    pointer-events: none; 
+    text-align: center; 
+    outline: none; 
+
 }
 
-/* Evita el enfoque en campos readonly */
-input[readonly]:focus {
-    outline: none; /* Quita el contorno de enfoque */
-    border: 1px solid #ddd; /* Mantén el borde sin cambios */
-}
-/*--nuevo--*/
+
 input[type="number"] {
     font-size: .8rem;
     width: 90%;
@@ -709,8 +742,6 @@ section {
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-
-
 /* Define la animación básica para la entrada */
 @keyframes fadeInUp {
     from {
@@ -766,13 +797,13 @@ section {
     }
 
     .row > section {
-        margin: 0; /* Elimina márgenes entre las cajas */
-        padding: 0; /* Asegúrate de que no haya padding adicional */
+        margin: 0; 
+        padding: 0; 
     }
 
     #box-losses,
     #box-earings {
-        margin: 0; /* Elimina márgenes adicionales */
+        margin: 0; 
     }
 }
 @media (max-width: 768px) {
@@ -780,9 +811,9 @@ section {
         margin-bottom: 190px; 
     }
     #box-data {
-        margin: 0 auto; /* Centra la caja horizontalmente */
-        width: 100%; /* Asegura que ocupe todo el ancho disponible */
-        max-width: none; /* Elimina cualquier restricción de ancho */
+        margin: 0 auto; 
+        width: 100%; 
+        max-width: none; 
     }
 }
 
@@ -810,7 +841,7 @@ section {
 
 .switch i {
     font-size: 1rem;
-    color: #050505;
+    color: var(--texto-1);
 }
 
 #switch::before {
@@ -830,21 +861,21 @@ section {
     border: none;
 }
 #switch.active i:first-child {
-    color: #050505;
+    color: var(--texto-1);
 }
 
 #switch:last-child.active {
-    background-color: #050505;
+    background-color: var(--texto-1);
     border: none;
 }
 body.active .switch {
     background-color: var(--dark-shadow);
 }
 body.active #switch::before {
-    background-color: black;
+    background-color:var(--texto-1);
 }
 body.active #switch.active i:first-child {
-    color: #fff;
+    color: var(--earings-cabecera-2);
 }
 
 
@@ -853,6 +884,8 @@ body.active {
 }
 body.active h1 {
     color: var(--texto-1);
+    color: var(--dark-1);
+
 }
 body.active section{
     background-color: var(--fondo-1);
@@ -860,7 +893,8 @@ body.active section{
 
 } 
 body.active section h2 {
-    color: var(--texto-2);
+    color: var(--dark-2);
+
 }
 /* =============================== */
 /*       BOX NAVIGATION DARK       */
@@ -877,10 +911,13 @@ body.active .container__nav ul li {
 body.active .container__nav ul li a {
     background-color: var(--fondo-1);
     border: 1px solid var(--borde);
-    color: var(--texto-2);
+    color: var(--dark-2);
 }
+
+
 body.active .container__nav ul li a:hover {
-    background-color: var(--hover);
+    background-color: var(--dark-2);
+    color: var(--dark-1);
 }
 /* =============================== */
 /*           DATOS DARK           */
@@ -889,9 +926,15 @@ body.active #box-data {
     background-color: var(--fondo-1);
     border:1px solid var(--borde);
 }
+body.active #box-data:hover {
+    background-color: var(--hover);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra adicional */
+    transform: scale(1.02); /* Pequeño zoom */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
 body.active #selected-box {
     background-color: var(--fondo-1);
-    color:  var(--texto-2);
+    color:  var(--dark-2);
 }
 body.active .input-container  {
     background-color: var(--fondo-1);
@@ -900,9 +943,13 @@ body.active .input-group {
     background-color: var(--fondo-1);
 }
 body.active .input-group .label {
-    color: var(--texto-1);
+    color: var(--dark-1);
 }
-
+/* Cambia el color de fondo al pasar el cursor sobre los inputs de peso y horas */
+body.active .input-container .input:hover {
+    background-color: var(--hover-input); /* Fondo suave azul */
+    border: 1px solid var(--borde); /* Cambia el borde */
+}
 /* =============================== */
 /*-----OPACIDAD CAJAS dark         */
 /* =============================== */
@@ -924,36 +971,58 @@ body.active .row{
 /* =============================== */
 
 body.active #box-losses {
-    background-color: var(--fondo-1);
+    background-color: var(--fondo-2);
     box-shadow: 0 2px 4px var(--dark-shadow); 
+}
 
+body.active #box-losses:hover {
+    background-color: var(--fondo-1);
+    box-shadow: 0 4px 10px var(--dark-shadow);
 }
 body.active .container-perdidas-item {
-    background-color: var(--fondo-1);
+    background-color: var(--fondo-2);
 }
 body.active .table__perdidas {
-    background-color: var(--fondo-1);
+    background-color: var(--fondo-2);
     box-shadow: 0 4px 12px var(--dark-shadow);
 }
 body.active .table__perdidas td {
-    background-color: var(--fondo-1);
+    background-color: var(--fondo-2);
+    color: var(--dark-2);
     border: 1px solid var(--borde);
     box-shadow: 0 4px 6px var(--dark-shadow);
-    color: var(--texto-2);
 } 
 body.active .table__perdidas th {
-    background-color: var(--fondo-1);
+    background-color: var(--fondo-2);
+    color: var(--dark-1);
     border: 1px solid var(--borde);
     box-shadow: 0 4px 6px var(--dark-shadow);    
-    color: var(--texto-2);
-}      
+}  
+body.active .table__perdidas tbody tr:hover td {
+    background-color: var(--hover-input);
+    color: var(--dark-1);
+    box-shadow: 0 1px 3px var(--sombra); /* Sombra ligera */
+} 
+body.active .table__perdidas tfoot th ,.table__perdidas tfoot td{
+    background-color: var(--fondo-2);
+    border: 1px solid var(--borde);
+    color: var(--dark-1)
+}   
+body.active .table__perdidas tfoot th:hover ,.table__perdidas tfoot td:hover {
+    opacity: 0.6;
+}
+/* Sombrea la última fila en "Total Pérdidas" dark*/
+body.active #box-losses .table__perdidas tfoot tr:hover td ,body.active #box-losses .table__perdidas tfoot tr:hover th {
+    background-color: var(--total-hover); 
+    color: var(--dark-1); 
+}
 body.active .table__perdidas td .input {
     background-color: var(--fondo-1);
-    color: var(--texto-2);
+    color: var(--dark-1);
 }
 body.active .table__perdidas td .input:hover {
     background-color: var(--hover-input);
-    color: #fff;
+    color: var(--dark-2);
 }
 body.active .table__perdidas td .input + .input { 
     background-color: var(--fondo-1);
@@ -961,16 +1030,15 @@ body.active .table__perdidas td .input + .input {
 }
 body.active .table__perdidas td:hover {
     background-color: var(--hover);
-    color: #fff;
 }
 body.active .table__perdidas th:hover {
     background-color: var(--hover);
-    color: #fff;
+    color: var(--dark-2);
 }
 
 body.active .table__perdidas tfoot tr:hover td {
     background-color: var(--hover);
-    color: #fff;
+    color: var(--dark-1);
 }
 
 /* =============================== */
@@ -978,50 +1046,73 @@ body.active .table__perdidas tfoot tr:hover td {
 /* =============================== */
 
 body.active #box-earings {
-    background-color: var(--fondo-1);
-    color: var(--texto-2);
+    background-color: var(--fondo-2);
     box-shadow: 0 2px 4px var(--dark-shadow); 
-
+}
+body.active #box-earings:hover {
+    background-color: var(--fondo-1);
+    box-shadow: 0 4px 10px var(--dark-shadow);
 }
 body.active .container-ingresos-item {
-    background-color: var(--fondo-1);
-    color: var(--texto-2);
+    background-color: var(--fondo-2);
 }
 body.active .table__ingresos {
-    background-color: var(--fondo-1);
-    color: var(--texto-2);
+    background-color: var(--fondo-2);
     box-shadow: 0 4px 12px var(--dark-shadow);
 }
 body.active .table__ingresos td {
-    background-color: var(--fondo-1);
-    color: var(--texto-2);
+    background-color: var(--fondo-2);
+    color: var(--dark-2);
     border: 1px solid var(--borde);
     box-shadow: 0 4px 6px var(--dark-shadow);
 }
 body.active .table__ingresos th {
-    background-color: var(--fondo-1);
-    color: var(--texto-2);
+    background-color: var(--fondo-2);
+    color: var(--dark-1);
     border: 1px solid var(--borde);
     box-shadow: 0 4px 6px var(--dark-shadow);
 }
+body.active .table__ingresos tbody tr:hover td {
+    background-color: var(--hover-input);
+    color: var(--dark-2);
+    box-shadow: 0 1px 3px var(--dark-shadow);
+}
+body.active .table__ingresos tfoot th ,.table__ingresos tfoot td{
+    background-color: var(--fondo-2);
+    border: 1px solid var(--borde);
+    color: var(--dark-1)
+}   
+body.active .table__ingresos tfoot th:hover ,.table__ingresos tfoot td:hover {
+    opacity: 0.6;
+}
+/* Sombrea la última fila en "Total Ingresos" */
+body.active #box-earings .table__ingresos tfoot tr:hover td, body.active #box-earings .table__ingresos tfoot tr:hover th {
+    background-color: var(--total-hover); 
+    color: var(--dark-1); 
+}
 body.active .table__ingresos td .input{
     background-color: var(--fondo-1);
-    color: var(--texto-2);
-    border: 1px solid var(--borde);
-    box-shadow: 0 4px 6px var(--dark-shadow);
+    color: var(--dark-1);    
 }
 
 body.active .table__ingresos td .input:hover {
     background-color: var(--hover-input);
-    color: var(--label);
+    color: var(--dark-2);
 }   
+body.active .table__ingresos td .input + .input { 
+    background-color: var(--fondo-1);
+    border: 1px solid var(--borde);
+}
+body.active .table__ingresos td:hover {
+    background-color: var(--hover);
+}
 body.active .table__ingresos th:hover {
     background-color: var(--hover-input);
     color: var(--label);
 }       
 body.active .table__ingresos tfoot tr:hover td {
     background-color: var(--hover-input);
-    color: var(--label);
+    color: var(--dark-1);
 }
 
 body.active .table__ingresos .input{
@@ -1030,17 +1121,14 @@ body.active .table__ingresos .input{
 }
 body.active .table__ingresos th:first-child,.table__ingresos td:first-child {
     box-shadow: 0 4px 6px var(--dark-shadow);
-    color: var(--texto-2);
+    color: var(--dark-2);
 }
 body.active .table__ingresos th:last-child,.table__ingresos td:last-child {
     box-shadow: 0 4px 6px var(--dark-shadow);
-    color: var(--texto-2); 
+    color: var(--dark-2); 
 }
-body.active #table__ingresos-concepto {
-    color: var(--texto-2);
-}
-body.active #table__ingresos-valor {
-    color: var(--texto-2);
+body.active #table__ingresos-concepto, body.active #table__ingresos-valor {
+    color: var(--dark-1);
 }
 
 
@@ -1060,14 +1148,21 @@ body.active .table-summary th, .table-summary td {
 }
 body.active .input.readonly {
     background-color: var(--summary-dark);
-    color: var(--body);
+    color: var(--dark-1);
 }
 body.active #balance-total-box {
     background-color: var(--summary-dark);
-    color: var(--texto-2);
+    color: var(--dark-2);
     text-align: center; 
     font-weight: bold; 
 }
+body.active #balance-total-box:hover {      
+    background-color: var(--summary-dark);
+    border: 1px solid var(--dark-2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+}
+
 /* =============================== */
 /*       AJUSTES PARA INPUTS       */
 /* =============================== */
@@ -1076,6 +1171,11 @@ body.active .input {   /*--input peso y horas de   --*/
     border: 1px solid var(--borde);
     background-color: var(--fondo-1);
 }
+body.active .input:focus {
+    border: 2px solid var(--dark-2);
+    box-shadow: 0 0 10px var(--dark-shadow);
+    transition: all 0.3s;
+}
 
 
 /* =============================== */
@@ -1083,27 +1183,27 @@ body.active .input {   /*--input peso y horas de   --*/
 /* =============================== */
 body.active #borrar-datos-principal{
     background-color: var(--button);
-    color: var(--texto-1);
-    border: 1px solid transparent;
+    color: var(--dark-2);
+    border: 1px solid var(--dark-1);
 
 
 }
 body.active #borrar-datos-principal:hover {
     background-color: var(--fondo-1);
-    color: var(--texto-1);
-    border: 1px solid var(--texto-2);
+    color: var(--dark-1);
+    border: 1px solid var(--dark-2);
 }
     /*--Botones perdidas e ingresos- dark-*/
 
 body.active .button button {
     background-color: var(--button);
-    color: var(--texto-1);
+    color: var(--dark-2);
 
 }
 body.active .button button:hover {
     background-color: var(--fondo-1);
-    color: var(--texto-1);
-    border:1px solid var(--texto-2);
+    color: var(--dark-1);
+    border:1px solid var(--dark-2);
 }
 
 /* =============================== */
@@ -1112,7 +1212,7 @@ body.active .button button:hover {
 
 body.active input[readonly] {
     background-color: var(--summary-dark);
-    color:var(--texto-2);
+    color:var(--dark-2);
     border: 1px solid var(--borde);
     text-align: center; 
 }
@@ -1122,7 +1222,7 @@ body.active input[readonly]:focus {
 }
 body.active input[type="number"] {
     background-color: var(--fondo);
-    color:var(--texto-2);
+    color:var(--dark-1);
     border: 1px solid var(--borde);
 }
 body.active input[type="number"]:invalid {
@@ -1158,67 +1258,8 @@ body.active .input.readonly.balance {
     }
 }
 
-/*  ------ANIMACIONES INPUT- dark-----*/
-/*--Cuando un usuario hace clic en un campo de entrada, puedes agregar un efecto para destacarlo.--*/
-
-body.active .input:focus {
-    border: 2px solid var(--texto-2);
-    box-shadow: 0 0 10px var(--dark-shadow);
-    transition: all 0.3s;
-}
 
 
-
-/*  ------ANIMACIONES INGRESOS dark------*/
-/*--Agrega un efecto de sombreado suave a las filas cuando el usuario las pase.--*/
-/* Pérdidas dark*/
-
-body.active .table__perdidas tbody tr:hover td {
-    background-color: var(--hover-input);
-    color: var(--texto-2);
-    box-shadow: 0 1px 3px var(--sombra); /* Sombra ligera */
-}
-/* Ingresos dark*/
-
-body.active .table__ingresos tbody tr:hover td {
-    background-color: var(--hover-input);
-    color: var(--texto-2);
-    box-shadow: 0 1px 3px var(--dark-shadow);
-}
-
-/* Sombrea la última fila en "Total Ingresos" */
-body.active #box-earings .table__ingresos tfoot tr:hover td, body.active #box-earings .table__ingresos tfoot tr:hover th {
-    background-color: var(--total-hover); 
-    color: var(--label); 
-
-}
-
-/* Sombrea la última fila en "Total Pérdidas" dark*/
-body.active #box-losses .table__perdidas tfoot tr:hover td ,body.active #box-losses .table__perdidas tfoot tr:hover th {
-    background-color: var(--total-hover); 
-    color: var(--label); 
-}
-
-body.active #box-data:hover {
-    background-color: var(--hover);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra adicional */
-    transform: scale(1.02); /* Pequeño zoom */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-}
-/* Cambia el color de fondo al pasar el cursor sobre los inputs de peso y horas */
-body.active .input-container .input:hover {
-    background-color: var(--hover-input); /* Fondo suave azul */
-    border: 1px solid var(--borde); /* Cambia el borde */
-}
-
-body.active #box-earings:hover {
-    background-color: var(--fondo-1);
-    box-shadow: 0 4px 10px var(--dark-shadow);
-}
-body.active #box-losses:hover {
-    background-color: var(--fondo-1);
-    box-shadow: 0 4px 10px var(--dark-shadow);
-}
 
 /* ocultando las flechas */
 /* Oculta las flechas en navegadores modernos */
@@ -1229,5 +1270,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="number"] {
+  appearance: textfield; /* Standard */
   -moz-appearance: textfield; /* Firefox */
 }
