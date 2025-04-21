@@ -247,14 +247,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- dark.js ---
-const switchElement = document.querySelector(".switch");
-cargarDarkModeDesdeLocalStorage();
-
 document.addEventListener("DOMContentLoaded", () => {
+  const switchElement = document.querySelector(".switch");
+  if (!switchElement) {
+    console.error(
+      "El elemento con la clase .switch no fue encontrado en el DOM."
+    );
+    return;
+  }
+
+  cargarDarkModeDesdeLocalStorage();
+
   switchElement.addEventListener("click", toggleDarkMode);
 });
 
 function toggleDarkMode() {
+  const switchElement = document.querySelector(".switch");
   switchElement.classList.toggle("active");
   document.body.classList.toggle("active");
   guardarDarkModeEnLocalStorage(switchElement.classList.contains("active"));
@@ -266,7 +274,8 @@ function guardarDarkModeEnLocalStorage(estado) {
 
 function cargarDarkModeDesdeLocalStorage() {
   const darkModeGuardado = localStorage.getItem("darkMode") === "true";
-  if (darkModeGuardado) {
+  const switchElement = document.querySelector(".switch");
+  if (darkModeGuardado && switchElement) {
     switchElement.classList.add("active");
     document.body.classList.add("active");
   }
@@ -276,6 +285,8 @@ function cargarDarkModeDesdeLocalStorage() {
 const btn_menu = document.querySelector(".btn-menu"),
   menu_options = document.querySelector(".menu-options");
 
-btn_menu.onclick = () => {
-  menu_options.classList.toggle("active");
-};
+if (btn_menu && menu_options) {
+  btn_menu.onclick = () => {
+    menu_options.classList.toggle("active");
+  };
+}
