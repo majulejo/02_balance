@@ -236,7 +236,7 @@ section {   /*--CAJA NAVIGATION  --*/
     animation: aparecer both;
     animation-timeline: view();
     animation-range: cover 10% contain 20%;
-    margin-bottom: 85px;
+    margin-bottom: 20px;
 }
 
 .table__perdidas { 
@@ -364,7 +364,7 @@ section {   /*--CAJA NAVIGATION  --*/
     animation: aparecer both;
     animation-timeline: view();
     animation-range: cover 10% contain 20%;
-    margin-bottom: 85px;   
+    margin-bottom: 20px;   
 }
 .table__ingresos {
     width: 100%;    
