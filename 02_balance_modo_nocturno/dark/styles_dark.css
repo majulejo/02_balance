@@ -6,8 +6,8 @@
 /* dark */
 --texto-1: #272626;
 --texto-2: #072664;
---dark-1:#cecece;
---dark-2:#908f8f;
+--dark-1:#e7e7e7;
+--dark-2:#757575;
 
 --label: #939393;
 --fondo-1: #a6a6a6;
@@ -272,11 +272,13 @@ section {   /*--CAJA NAVIGATION  --*/
     font-weight: bold;
     border-collapse: collapse;
 }
-.table__perdidas tfoot th ,.table__perdidas tfoot td{
+.table__perdidas tfoot th  , .table__perdidas tfoot td{
     background-color: var(--losses-cabecera-2);
     border: 1px solid var(--losses-borde);
     color: var(--texto-2)
 }
+
+
 .table__perdidas tfoot th:hover ,.table__perdidas tfoot td:hover {
     opacity: 0.6;
 }
@@ -548,8 +550,6 @@ section {   /*--CAJA NAVIGATION  --*/
 
 
 
-
-
 /* =============================== */
 /*             BUTTON             */
 /* =============================== */
@@ -606,7 +606,6 @@ input[readonly] {
 
 }
 
-
 input[type="number"] {
     font-size: .8rem;
     width: 90%;
@@ -625,9 +624,6 @@ input:invalid {
     color: #fff;
 
 }
-
-
-
 
 /*==============================*/
 /*     ANIMACIONES BALANCE      */
@@ -671,9 +667,6 @@ section {
         box-shadow: 0 0 5px rgba(23, 24, 23, 0.5);
     }
 }
-
-
-
 
 
 /*  ------ANIMACIONES PERDIDAS------*/
@@ -1003,12 +996,12 @@ body.active .table__perdidas tbody tr:hover td {
     color: var(--dark-1);
     box-shadow: 0 1px 3px var(--sombra); /* Sombra ligera */
 } 
-body.active .table__perdidas tfoot th ,.table__perdidas tfoot td{
+body.active .table__perdidas tfoot th ,body.active .table__perdidas tfoot td{
     background-color: var(--fondo-2);
     border: 1px solid var(--borde);
     color: var(--dark-1)
 }   
-body.active .table__perdidas tfoot th:hover ,.table__perdidas tfoot td:hover {
+body.active .table__perdidas tfoot th:hover ,body.active .table__perdidas tfoot td:hover {
     opacity: 0.6;
 }
 /* Sombrea la última fila en "Total Pérdidas" dark*/
@@ -1077,12 +1070,12 @@ body.active .table__ingresos tbody tr:hover td {
     color: var(--dark-2);
     box-shadow: 0 1px 3px var(--dark-shadow);
 }
-body.active .table__ingresos tfoot th ,.table__ingresos tfoot td{
+body.active .table__ingresos tfoot th ,body.active .table__ingresos tfoot td{
     background-color: var(--fondo-2);
     border: 1px solid var(--borde);
     color: var(--dark-1)
 }   
-body.active .table__ingresos tfoot th:hover ,.table__ingresos tfoot td:hover {
+body.active .table__ingresos tfoot th:hover ,body.active .table__ingresos tfoot td:hover {
     opacity: 0.6;
 }
 /* Sombrea la última fila en "Total Ingresos" */
@@ -1152,7 +1145,7 @@ body.active .input.readonly {
 }
 body.active #balance-total-box {
     background-color: var(--summary-dark);
-    color: var(--dark-2);
+    color: var(--dark-1);
     text-align: center; 
     font-weight: bold; 
 }

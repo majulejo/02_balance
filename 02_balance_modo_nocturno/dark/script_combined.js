@@ -156,14 +156,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isDarkMode) {
         // Colores más suaves en modo oscuro
         balanceTotalField.style.backgroundColor =
-          balanceTotal >= 0 ? "#7c8b9c" : "#917070"; // Azul apagado y rojo apagado
+          balanceTotal >= 0 ? "#0070C0" : "#a31c1c"; // Azul apagado y rojo apagado
       } else {
         // Colores intensos en modo claro
         balanceTotalField.style.backgroundColor =
-          balanceTotal >= 0 ? "#0074ff" : "#f51d1d";
+          balanceTotal >= 0 ? "#00A2E8" : "#ff0000";
       }
 
-      balanceTotalField.style.color = "#545352";
       balanceTotalField.style.fontWeight = "bold";
       balanceTotalField.value = balanceTotal.toFixed(2);
     }
