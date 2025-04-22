@@ -832,7 +832,7 @@ section {
     border: none;
     background-color: var(--losses-cabecera-2);
     top:55px;
-    left: 48%;
+    left: 45%;
     z-index: 100;
     border: 2px solid var(--dark-shadow);
 }
