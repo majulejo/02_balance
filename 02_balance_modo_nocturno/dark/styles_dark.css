@@ -353,7 +353,7 @@ section {   /*--CAJA NAVIGATION  --*/
     box-shadow: 0 2px 4px var(--light-shadow); 
     padding-bottom: 20px; 
     border-radius: 10px;
-    margin-bottom: 180px; 
+    margin-bottom: 175px; 
     color: var(--texto-2);
 }
 
@@ -479,8 +479,8 @@ section {   /*--CAJA NAVIGATION  --*/
     bottom: 0;
     margin-top: 20px; 
     align-self: center; 
-    margin: 10px auto; 
-    padding: 10px 20px; 
+    margin: 5px auto; 
+    padding: 5px 20px; 
     width: 100%; 
     max-width: 1705px; 
     opacity: 0.6;
@@ -492,7 +492,7 @@ section {   /*--CAJA NAVIGATION  --*/
     justify-content: center;
     gap: 30px;
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 20px;
     padding-bottom: 20px;
 
 }
@@ -821,8 +821,8 @@ section {
 
 /*ESTILOS DE SWITCH*/
 .switch {
-    width: 60px;
-    height: 30px;
+    width: 40px;
+    height: 15px;
     padding: 0 5px;
     display: flex;
     align-items: center;
@@ -832,13 +832,13 @@ section {
     border: none;
     background-color: var(--losses-cabecera-2);
     top:55px;
-    left: 20px;
+    left: 48%;
     z-index: 100;
     border: 2px solid var(--dark-shadow);
 }
 
 .switch i {
-    font-size: 1rem;
+    font-size: .6rem;
     color: var(--texto-1);
 }
 
@@ -846,8 +846,8 @@ section {
 #switch::before {
     content: '';
     position: absolute;
-    height: 25px;
-    width: 25px;
+    height: 16px;
+    width: 16px;
     border-radius: 50%;
     background-color: var(--earings-cabecera-2);
     border: none;
