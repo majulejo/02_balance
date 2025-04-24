@@ -516,7 +516,20 @@ section {   /*--CAJA NAVIGATION  --*/
     font-weight: bold; /* Resalta el texto */
     font-size: 1.2rem !important;
 }
+/* FOOTER */
+footer  p {
+    background-color: var(--body);
+    color: var(--fuente);
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    font-size: 4px important;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: fixed;
 
+}
 
 /* =============================== */
 /*       AJUSTES PARA INPUTS       */
