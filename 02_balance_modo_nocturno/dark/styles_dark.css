@@ -45,7 +45,6 @@
 * {
     box-sizing: border-box;
     outline: none;
-    font-size: 1rem;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -93,6 +92,8 @@ section {   /*--CAJA NAVIGATION  --*/
 /* Configuración para #box-navigation */
 #box-navigation {   /*--CAJA NAVIGATION  --*/
     background-color: var(--body); 
+	    font-size: 1rem;
+
     width: 100%;
     text-align: center;
     margin-top: 10px; /* Espacio adicional después del título */
@@ -140,6 +141,8 @@ section {   /*--CAJA NAVIGATION  --*/
 /* =============================== */
 
 #box-data {    /*--  CAJA DATA  --*/
+    font-size: 1rem;
+
     display: flex;
     background-color: var(--body); 
     color: var(--texto-2);
@@ -196,6 +199,8 @@ section {   /*--CAJA NAVIGATION  --*/
 /* =============================== */
 
 .row {  /*--separación entre perdidas, ingresos y summary--*/
+    font-size: 1rem;
+
     display: flex;
     flex-wrap: wrap; 
     gap: 20px; 
@@ -220,6 +225,8 @@ section {   /*--CAJA NAVIGATION  --*/
 /*             PERDIDAS           */
 /* =============================== */
 #box-losses {   /*--TODA LA CAJA PERDIDAS MENOS READONLY, Concepto,Valor y Total Perdidas  --*/
+    font-size: 1rem;
+
     background-color: var(--losses-bc);
     box-shadow: 0 2px 4px var(--light-shadow); 
     padding-bottom: 20px; 
@@ -349,6 +356,8 @@ section {   /*--CAJA NAVIGATION  --*/
 
 
 #box-earings {    /*--TODA LA CAJA INGRESOS MENOS READONLY, Concepto,Valor y Total Ingresos  --*/
+    font-size: 1rem;
+
     background-color: var(--earings-bc);
     box-shadow: 0 2px 4px var(--light-shadow); 
     padding-bottom: 20px; 
@@ -472,9 +481,12 @@ section {   /*--CAJA NAVIGATION  --*/
 
 
 #box-summary {
+	    font-size: 1rem;
+
     background-color: var(--summary); 
     border-top: 2px solid var(--losses-borde); 
     box-shadow: 0 -4px 6px var(--light-shadow); 
+	
     position: fixed;
     bottom: 0;
     margin-top: 20px; 
@@ -510,25 +522,28 @@ section {   /*--CAJA NAVIGATION  --*/
 }
 
 #balance-total-box {
+	    font-size: 1rem;
+
     background-color: inherit; /* Color de fondo definido por JavaScript */
     color: var(--texto-1); /* Asegura que el texto sea visible */
     text-align: center; /* Centra el texto si es necesario */
     font-weight: bold; /* Resalta el texto */
     font-size: 1.2rem !important;
 }
-/* FOOTER */
-footer  p {
-    background-color: var(--body);
-    color: var(--fuente);
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-    font-size: 4px important;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    position: fixed;
+/* =============================== */
+/* =========FOOTER================ */
+/* =============================== */
 
+section >  p {
+	font-size: 8px !important;
+	font-weight: bold;
+    color: var(--texto-1);
+    text-align: center;
+    padding: 5px;
+	padding-bottom:10px;
+    margin: 0 auto;
+    width: 100%;
+z-index:50;    
 }
 
 /* =============================== */
