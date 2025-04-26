@@ -35,10 +35,7 @@
 --summary: #ebf4f4;
 --summary-dark: #a5a5a7;
 --summary-bc: #EBF4F4;
-
 }
-
-
 
 /* Contenedor principal para ordenar las cajas  para adaptarse a pantallas*/
 * {
@@ -193,7 +190,6 @@ section {   /*--CAJA NAVIGATION  --*/
 
 .row {  /*--separación entre perdidas, ingresos y summary--*/
     font-size: 1rem;
-
     display: flex;
     flex-wrap: wrap; 
     gap: 20px; 
@@ -274,10 +270,10 @@ section {   /*--CAJA NAVIGATION  --*/
     color: var(--texto-2);
 }
 
-
 .table__perdidas tfoot th:hover ,.table__perdidas tfoot td:hover {
     opacity: 0.6;
 }
+
 .table__perdidas td .input {  
     background-color: var(--losses-bc);
     color: var(--texto-2);
@@ -345,7 +341,6 @@ section {   /*--CAJA NAVIGATION  --*/
 
 
 #box-earings {    /*--TODA LA CAJA INGRESOS MENOS READONLY, Concepto,Valor y Total Ingresos  --*/
-
     background-color: var(--earings-bc);
     box-shadow: 0 2px 4px var(--light-shadow); 
     padding-bottom: 20px; 
@@ -363,6 +358,7 @@ section {   /*--CAJA NAVIGATION  --*/
     animation-range: cover 10% contain 20%;
     margin-bottom: 85px;   
 }
+
 .table__ingresos {
     width: 100%;    
     height: 100%;  
@@ -400,9 +396,11 @@ section {   /*--CAJA NAVIGATION  --*/
     border: 1px solid var(--earings-borde);
     color: var(--texto-2);
 }
+
 .table__ingresos tfoot th:hover ,.table__ingresos tfoot td:hover {
     opacity: 0.6;
 }
+
 .table__ingresos td .input {
     background-color: var(--earings-bc); 
     color: var(--texto-2);
@@ -447,6 +445,7 @@ section {   /*--CAJA NAVIGATION  --*/
     font-size: 1.2rem;
     text-align: center;
 }
+
 /*--  input ingresos --*/
 .table__ingresos td input {  
     display: block; 
@@ -518,8 +517,8 @@ section {   /*--CAJA NAVIGATION  --*/
 
 footer  {
     color: var(--dark-2);
-	font-size: 8px ;
-	font-weight: bold;
+    font-size: 8px ;
+    font-weight: bold;
     text-align: center;
     padding: 5px;
     margin-bottom: 5px;
@@ -548,6 +547,7 @@ footer  {
     text-align: center;
     font-weight: bold;
 }
+
 /* Al enfocar el input */
 
 .input:focus {
@@ -556,9 +556,6 @@ footer  {
     box-shadow: 0 0 10px var(--light-shadow);
     transition: all 0.3s;
 }
-
-
-
 
 /* =============================== */
 /*             BUTTON             */
