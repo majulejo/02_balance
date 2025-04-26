@@ -45,7 +45,6 @@
 * {
     box-sizing: border-box;
     outline: none;
-    font-size: 1rem;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -82,6 +81,8 @@ section {   /*--CAJA NAVIGATION  --*/
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 4px 6px var(--light-shadow);
+    font-size: 1rem;
+
 }
 
 
@@ -516,19 +517,21 @@ section {   /*--CAJA NAVIGATION  --*/
     font-weight: bold; /* Resalta el texto */
     font-size: 1.2rem !important;
 }
-/* FOOTER */
-footer  p {
-    background-color: var(--body);
-    color: var(--fuente);
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-    font-size: 4px important;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    position: fixed;
 
+/* =============================== */
+/* FOOTER */
+/* =============================== */
+
+footer  {
+    color: var(--dark-2);
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin: 0 auto;
+    font-size: 8px;
+    font-weight: bold;
+    width: 100%;
+    z-index: 50;
 }
 
 /* =============================== */
