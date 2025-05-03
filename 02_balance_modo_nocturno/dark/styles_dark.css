@@ -8,6 +8,7 @@
 --texto-2: #072664;
 --dark-1:#e7e7e7;
 --dark-2:#757575;
+
 --label: #939393;
 --fondo-1: #a6a6a6;
 --fondo-2: #aeacac;
@@ -35,7 +36,10 @@
 --summary: #ebf4f4;
 --summary-dark: #a5a5a7;
 --summary-bc: #EBF4F4;
+
 }
+
+
 
 /* Contenedor principal para ordenar las cajas  para adaptarse a pantallas*/
 * {
@@ -53,6 +57,7 @@ body {
     padding: 0;
     background-color: var(--body);
     transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 
 /* Mantener el encabezado centrado */
@@ -76,6 +81,8 @@ section {   /*--CAJA NAVIGATION  --*/
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 4px 6px var(--light-shadow);
+    font-size: 1rem;
+
 }
 
 
@@ -130,6 +137,80 @@ section {   /*--CAJA NAVIGATION  --*/
     }
 
 /* =============================== */
+/* ======icono_balance============ */
+/* =============================== */
+    .icono-container {
+        position: relative;
+        display: inline-block;
+        width: 25px !important;
+        height: 25px !important;
+      }
+
+      .icono {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          transition: opacity 0.5s ease-in-out; /* Transición suave */
+      }
+
+     /* Mostrar el icono azul por defecto */
+.icono.azul {
+    opacity: 1;
+}
+
+/* Ocultar el icono verde por defecto */
+.icono.verde {
+    opacity: 0;
+}
+
+/* Cuando se hace hover, el azul desaparece y el verde aparece */
+.icono-container:hover .azul {
+    opacity: 0;
+}
+
+.icono-container:hover .verde {
+    opacity: 1;
+}
+
+/* ESTILOS PARA MODO OSCURO */
+body.active .icono.azul {
+    opacity: 0;
+}
+
+body.active .icono.verde {
+    opacity: 0;
+}
+
+
+/* En modo oscuro mostrar evolucion_negro.png */
+body.active .icono-container {
+    width: 25px !important;
+    height: 25px !important;
+}
+body.active img {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+body.active .icono-container img {
+    display: none;
+}
+
+body.active .icono-container {
+    background-image: url('evolucion_negro.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+body.active .icono-container:hover {
+    background-image: url('evolucion_blanco.png');
+}
+
+
+      /* Fin icono_balance */
+
+/* =============================== */
 /*             DATOS              */
 /* =============================== */
 
@@ -153,7 +234,8 @@ section {   /*--CAJA NAVIGATION  --*/
     font-weight: bold;
     color: var(--texto-2);
     text-align: center;
-    margin: 0 auto;
+    margin: 0 auto;;
+
 }
 
 .input-container {   /*--  peso y horas desde ingreso y sus input--*/ 
@@ -189,7 +271,6 @@ section {   /*--CAJA NAVIGATION  --*/
 /* =============================== */
 
 .row {  /*--separación entre perdidas, ingresos y summary--*/
-    font-size: 1rem;
     display: flex;
     flex-wrap: wrap; 
     gap: 20px; 
@@ -220,6 +301,7 @@ section {   /*--CAJA NAVIGATION  --*/
     border-radius: 10px;
     margin-bottom: 180px; 
     color: var(--texto-2);
+
 }
 
 .container-perdidas-item {
@@ -251,7 +333,8 @@ section {   /*--CAJA NAVIGATION  --*/
     padding: 10px 20px; 
     vertical-align: center;   
     font-weight: bold; 
-    color: var(--texto-2);
+    color: var(--texto-2)
+
 }
 .table__perdidas th {
     background-color: var(--losses-cabecera-2);
@@ -267,13 +350,13 @@ section {   /*--CAJA NAVIGATION  --*/
 .table__perdidas tfoot th  , .table__perdidas tfoot td{
     background-color: var(--losses-cabecera-2);
     border: 1px solid var(--losses-borde);
-    color: var(--texto-2);
+    color: var(--texto-2)
 }
+
 
 .table__perdidas tfoot th:hover ,.table__perdidas tfoot td:hover {
     opacity: 0.6;
 }
-
 .table__perdidas td .input {  
     background-color: var(--losses-bc);
     color: var(--texto-2);
@@ -284,8 +367,8 @@ section {   /*--CAJA NAVIGATION  --*/
     border-radius: 5px;
     display: block; 
     font-weight: bold;
-}
 
+}
 .table__perdidas td .input + .input { 
     background-color: var(--losses-bc);
     border: 1px solid var(--losses-borde);
@@ -358,7 +441,6 @@ section {   /*--CAJA NAVIGATION  --*/
     animation-range: cover 10% contain 20%;
     margin-bottom: 85px;   
 }
-
 .table__ingresos {
     width: 100%;    
     height: 100%;  
@@ -377,7 +459,7 @@ section {   /*--CAJA NAVIGATION  --*/
     padding: 10px 20px; 
     vertical-align: center;    
     font-weight: bold; 
-    color: var(--texto-2);
+    color: var(--texto-2)
 }
 
 .table__ingresos th {
@@ -394,13 +476,11 @@ section {   /*--CAJA NAVIGATION  --*/
 .table__ingresos tfoot th ,.table__ingresos tfoot td{
     background-color: var(--earings-cabecera-2);
     border: 1px solid var(--earings-borde);
-    color: var(--texto-2);
+    color: var(--texto-2)
 }
-
 .table__ingresos tfoot th:hover ,.table__ingresos tfoot td:hover {
     opacity: 0.6;
 }
-
 .table__ingresos td .input {
     background-color: var(--earings-bc); 
     color: var(--texto-2);
@@ -445,7 +525,6 @@ section {   /*--CAJA NAVIGATION  --*/
     font-size: 1.2rem;
     text-align: center;
 }
-
 /*--  input ingresos --*/
 .table__ingresos td input {  
     display: block; 
@@ -470,7 +549,7 @@ section {   /*--CAJA NAVIGATION  --*/
 #box-summary {
     background-color: var(--summary); 
     border-top: 2px solid var(--losses-borde); 
-    box-shadow: 0 -4px 6px var(--light-shadow); 	
+    box-shadow: 0 -4px 6px var(--light-shadow); 
     position: fixed;
     bottom: 0;
     margin-top: 20px; 
@@ -490,11 +569,13 @@ section {   /*--CAJA NAVIGATION  --*/
     margin: 0 auto;
     margin-top: 20px;
     padding-bottom: 20px;
+
 }
 
 .table-summary th, .table-summary td {
     padding: 5px;
     text-align: left;
+
 }
 /* Inputs readonly de  box summary*/
 .input.readonly {
@@ -510,23 +591,21 @@ section {   /*--CAJA NAVIGATION  --*/
     font-weight: bold; /* Resalta el texto */
     font-size: 1.2rem !important;
 }
-
 /* =============================== */
-/* FOOTER */
+/* ==========FOOTER=============== */
 /* =============================== */
 
 footer  {
     color: var(--dark-2);
-    font-size: 8px ;
-    font-weight: bold;
     text-align: center;
     padding: 5px;
     margin-bottom: 5px;
     margin: 0 auto;
+    font-size: 8px;
+    font-weight: bold;
     width: 100%;
     z-index: 50;
 }
-
 
 /* =============================== */
 /*       AJUSTES PARA INPUTS       */
@@ -547,7 +626,6 @@ footer  {
     text-align: center;
     font-weight: bold;
 }
-
 /* Al enfocar el input */
 
 .input:focus {
@@ -556,6 +634,9 @@ footer  {
     box-shadow: 0 0 10px var(--light-shadow);
     transition: all 0.3s;
 }
+
+
+
 
 /* =============================== */
 /*             BUTTON             */
