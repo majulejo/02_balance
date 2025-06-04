@@ -259,20 +259,20 @@ body.active .calculadora-btn:hover {
     color: white;
 }
 
-body.active .calculadora-medicacion .calculadora-btn.igual {
-    background-color: #0D47A1;
+body.active .calculadora-medicacion .calculadora-btn.igual, 
+body.active .calculadora-sangre .calculadora-btn.igual, 
+body.active .calculadora-oral .calculadora-btn.igual {
+    background-color: var(--button);
     color: var(--dark-1);
 }
+body.active .calculadora-medicacion .calculadora-btn.igual:hover, 
+body.active .calculadora-sangre .calculadora-btn.igual:hover, 
+body.active .calculadora-oral .calculadora-btn.igual:hover {
+    background-color: var(--dark-1);
+    color: var(--texto-1);
+      transform: scale(.9);
 
-body.active .calculadora-sangre .calculadora-btn.igual {
-    background-color: #B71C1C;
-    color: var(--dark-1);
-}
-
-body.active .calculadora-sangre .calculadora-btn.igual {
-    background-color: #148a1e;
-    color: var(--dark-1);
-}
+} 
 
 /* Botón limpiar */
 .calculadora-btn.limpiar {
@@ -352,6 +352,7 @@ body.active .calculadora-btn.limpiar {
   color: #ff4757;
   transform: scale(1.1);
 }
+.
 
 .calculadora-cerrar i {
   display: block;
@@ -363,7 +364,7 @@ body.active .calculadora-cerrar {
 }
 
 body.active .calculadora-cerrar:hover {
-  color: #ff6b6b;
+  color: var(--texto-1);
 }
 /* =============================== */
 /*         BOX NAVIGATION          */
