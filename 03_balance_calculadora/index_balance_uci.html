@@ -67,8 +67,8 @@
       target="_blank"
       class="icono-container"
     >
-      <img src="evolucion_azul.png" alt="Balance" class="icono azul" />
-      <img src="evolucion_verde.png" alt="Balance Azul" class="icono verde" />
+      <img src="img/evolucion_azul.png" alt="Balance" class="icono azul" />
+      <img src="img/evolucion_verde.png" alt="Balance Azul" class="icono verde" />
     </a>
 
     <!----------------DATOS------------------->
@@ -195,7 +195,7 @@
                   />
                   <input
                     id="fiebre39-calculo-box"
-                    class="input readonly perdida"
+                    class="input perdida readonly"
                     type="number"
                     placeholder="Cálculo de Fiebre >39°C"
                     readonly
@@ -215,7 +215,7 @@
                   />
                   <input
                     id="rpm25-calculo-box"
-                    class="input readonly perdida"
+                    class="input perdida readonly"
                     type="number"
                     readonly
                     placeholder="Cálculo de Rpm>25"
@@ -235,7 +235,7 @@
                   />
                   <input
                     id="rpm35-calculo-box"
-                    class="input readonly perdida"
+                    class="input perdida readonly"
                     type="number"
                     readonly
                     placeholder="Cálculo de Rpm>35"
@@ -280,7 +280,7 @@
                 <td>
                   <input
                     id="perdidas-insensibles-box"
-                    class="input readonly perdida"
+                    class="input perdida readonly"
                     type="number"
                     readonly
                     placeholder="Pérdidas Insensibles"
@@ -293,7 +293,7 @@
                   <input
                     type="number"
                     id="perdida-fuerafluidos-box"
-                    class="input readonly"
+                    class="input perdida readonly"
                     placeholder="Vómitos,Sudor,Fiebre,Tqn"
                     readonly
                   />
@@ -306,7 +306,7 @@
                 <td>
                   <input
                     id="total-perdidas-box"
-                    class="input readonly perdida"
+                    class="input perdida readonly"
                     type="number"
                     readonly
                     placeholder="Total Pérdidas"
@@ -316,11 +316,9 @@
             </tfoot>
           </table>
         </div>
-        <div class="button">
-          <button id="borrar-datos" onclick="borrarDatos()">
-            Borrar Datos
-          </button>
-        </div>
+        <<div class="button">
+  <button id="borrar-perdidas">Borrar Pérdidas</button>
+</div>
       </section>
 
       <!-------INGRESOS----------->
@@ -487,7 +485,7 @@
                 <td>
                   <input
                     id="ingreso-agua-endogena-box"
-                    class="input readonly ingreso"
+                    class="input ingreso readonly"
                     type="number"
                     readonly
                     placeholder="Agua Endógena"
@@ -541,7 +539,7 @@
                 <td>
                   <input
                     id="resumen-total-ingresos-box"
-                    class="input readonly ingreso"
+                    class="input ingreso readonly"
                     type="number"
                     readonly
                     placeholder="Total Ingresos"
@@ -552,9 +550,8 @@
           </table>
         </div>
         <div class="button">
-          <button id="borrar-datos" onclick="borrarDatos()">
-            Borrar Datos
-          </button>
+<button id="borrar-ingresos">Borrar Ingresos</button>
+</div>
         </div>
       </section>
     </div>
@@ -569,7 +566,7 @@
             <td>
               <input
                 id="balance-total-ingresos-box"
-                class="input readonly ingreso"
+                class="input ingreso readonly"
                 type="number"
                 readonly
                 placeholder="Total Ingresos"
@@ -581,7 +578,7 @@
             <td>
               <input
                 id="balance-total-perdidas-box"
-                class="input readonly perdida"
+                class="input perdida readonly"
                 type="number"
                 readonly
                 placeholder="Total Pérdidas"
@@ -593,7 +590,7 @@
             <td>
               <input
                 id="balance-total-box"
-                class="input readonly balance"
+                class="input balance readonly"
                 type="number"
                 readonly
                 placeholder="Balance Total"
