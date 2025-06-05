@@ -1,10 +1,7 @@
-// --- script_combined.js ---
 document.addEventListener("DOMContentLoaded", () => {
   // Variables globales
   const pesoInput = document.querySelector("#peso-box");
-  const horasDesdeIngresoInput = document.querySelector(
-    "#horas-desde-ingreso-box"
-  );
+  const horasDesdeIngresoInput = document.querySelector("#horas-desde-ingreso-box");
   const boxLosses = document.querySelector("#box-losses");
   const boxEarings = document.querySelector("#box-earings");
   const selectedBoxElement = document.querySelector("#selected-box h2");
@@ -14,9 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Objeto para almacenar los datos de cada box
   const boxData = {};
 
-  // Aplicar clase 'disabled' al inicio
+  // Aplicar clase 'disabled' y deshabilitar campos al inicio
   boxLosses.classList.add("disabled");
   boxEarings.classList.add("disabled");
+
+  if (pesoInput) pesoInput.disabled = true;
+  if (horasDesdeIngresoInput) horasDesdeIngresoInput.disabled = true;
 
   let boxSeleccionado = false;
 
@@ -154,17 +154,25 @@ document.addEventListener("DOMContentLoaded", () => {
       const isDarkMode = document.body.classList.contains("active");
 
       if (isDarkMode) {
-        // Colores más suaves en modo oscuro
         balanceTotalField.style.backgroundColor =
-          balanceTotal >= 0 ? "#0070C0" : "#a31c1c"; // Azul apagado y rojo apagado
+          balanceTotal >= 0 ? "#0070C0" : "#a31c1c";
       } else {
-        // Colores intensos en modo claro
         balanceTotalField.style.backgroundColor =
           balanceTotal >= 0 ? "#00A2E8" : "#ff0000";
       }
 
       balanceTotalField.style.fontWeight = "bold";
       balanceTotalField.value = balanceTotal.toFixed(2);
+    }
+  }
+
+  function updateMainDeleteButtonText() {
+    const currentBox = selectedBoxElement.getAttribute("data-current-box");
+    const mainDeleteButton = document.querySelector("#borrar-datos-principal");
+    if (mainDeleteButton && currentBox) {
+      mainDeleteButton.textContent = `Borrar Datos del Box ${currentBox}`;
+    } else if (mainDeleteButton) {
+      mainDeleteButton.textContent = "Borrar Datos";
     }
   }
 
@@ -180,8 +188,14 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedBoxElement.textContent = `Has seleccionado el Box ${boxNumber}`;
       selectedBoxElement.setAttribute("data-current-box", boxNumber);
       boxSeleccionado = true;
+
+      // Habilitar campos de peso y horas
+      if (pesoInput) pesoInput.disabled = false;
+      if (horasDesdeIngresoInput) horasDesdeIngresoInput.disabled = false;
+
       verificarHabilitacion();
       calculateDerivedValues();
+      updateMainDeleteButtonText(); // Actualiza texto del botón principal
     });
   });
 
@@ -192,7 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Restricciones de valores entre 0 y 24 para los campos específicos
   const restrictedInputs = [
     "#horas-desde-ingreso-box",
     "#fiebre37-horas-box",
@@ -216,77 +229,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const deleteButtons = document.querySelectorAll("button#borrar-datos");
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const currentBox = selectedBoxElement.getAttribute("data-current-box");
-      if (currentBox) {
-        boxData[currentBox] = {};
-        allInputs.forEach((input) => (input.value = ""));
-        calculateDerivedValues();
-      }
-    });
-  });
-
   const mainDeleteButton = document.querySelector("#borrar-datos-principal");
   if (mainDeleteButton) {
     mainDeleteButton.addEventListener("click", (event) => {
       event.preventDefault();
       const currentBox = selectedBoxElement.getAttribute("data-current-box");
+
       if (currentBox) {
         boxData[currentBox] = {};
-        allInputs.forEach((input) => (input.value = ""));
-        calculateDerivedValues();
       }
-      alert("Datos del Box borrados correctamente");
+
+      allInputs.forEach((input) => (input.value = ""));
+      calculateDerivedValues();
+
+      // Restablecer estado inicial
+      boxLosses.classList.add("disabled");
+      boxEarings.classList.add("disabled");
+      selectedBoxElement.textContent = "Selecciona un Box";
+      selectedBoxElement.removeAttribute("data-current-box");
+      boxSeleccionado = false;
+
+      // Bloquear peso y horas nuevamente
+      if (pesoInput) pesoInput.disabled = true;
+      if (horasDesdeIngresoInput) horasDesdeIngresoInput.disabled = true;
+
+      updateMainDeleteButtonText(); // Actualiza texto del botón principal
+
+      alert("Todos los datos han sido borrados correctamente.");
     });
   }
 
+  // Botón para borrar solo Ingresos
+document.getElementById("borrar-ingresos")?.addEventListener("click", () => {
+  const ingresoInputs = document.querySelectorAll(".ingreso:not([readonly])");
+  console.log("Campos de ingreso editables:", document.querySelectorAll(".ingreso:not([readonly])"));
+console.log("Campos de ingreso editables:", document.querySelectorAll(".ingreso:not([readonly])"));
+  ingresoInputs.forEach((input) => (input.value = ""));
+  calculateDerivedValues();
+  alert("Datos de Ingresos borrados correctamente.");
+});
+
+// Botón para borrar solo Pérdidas
+document.getElementById("borrar-perdidas")?.addEventListener("click", () => {
+  const perdidaInputs = document.querySelectorAll(".perdida:not([readonly])");
+  console.log("Campos de pérdida editables:", document.querySelectorAll(".perdida:not([readonly])"));
+  perdidaInputs.forEach((input) => (input.value = ""));
+  calculateDerivedValues();
+  alert("Datos de Pérdidas borrados correctamente.");
+});
+
   verificarHabilitacion();
 });
-
-// --- dark.js ---
-document.addEventListener("DOMContentLoaded", () => {
-  const switchElement = document.querySelector(".switch");
-  if (!switchElement) {
-    console.error(
-      "El elemento con la clase .switch no fue encontrado en el DOM."
-    );
-    return;
-  }
-
-  cargarDarkModeDesdeLocalStorage();
-
-  switchElement.addEventListener("click", toggleDarkMode);
-});
-
-function toggleDarkMode() {
-  const switchElement = document.querySelector(".switch");
-  switchElement.classList.toggle("active");
-  document.body.classList.toggle("active");
-  guardarDarkModeEnLocalStorage(switchElement.classList.contains("active"));
-}
-
-function guardarDarkModeEnLocalStorage(estado) {
-  localStorage.setItem("darkMode", estado);
-}
-
-function cargarDarkModeDesdeLocalStorage() {
-  const darkModeGuardado = localStorage.getItem("darkMode") === "true";
-  const switchElement = document.querySelector(".switch");
-  if (darkModeGuardado && switchElement) {
-    switchElement.classList.add("active");
-    document.body.classList.add("active");
-  }
-}
-
-// --- menu.js ---
-const btn_menu = document.querySelector(".btn-menu"),
-  menu_options = document.querySelector(".menu-options");
-
-if (btn_menu && menu_options) {
-  btn_menu.onclick = () => {
-    menu_options.classList.toggle("active");
-  };
-}
